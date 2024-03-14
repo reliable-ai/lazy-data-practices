@@ -3,8 +3,6 @@
 .RData
 .Ruserdata
 
-# Don't track notebook output
-notebooks/*.html
+# Don't track PDF output
 notebooks/*.pdf
 notebooks/*.tex
-notebooks/*_files/
