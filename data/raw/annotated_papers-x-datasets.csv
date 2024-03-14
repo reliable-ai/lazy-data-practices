@@ -1,0 +1,282 @@
+new_dataset_id,name,paper,org_id,task_id,task,data_spec,STATUS,is_prediction_task,info_target,info_features,info_protected,col_protected,protected_processing_standard
+ORG-001-DS-0,NA,sabato2020bounding,ORG-001,ORG-001-01,fair classification,tabular data,DONE,No,Not Applicable,Not Applicable,Not Applicable,sabato2020bounding,NA
+ORG-006-DS-0,Adult,sharma2020:cc,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""race"": ""race""}",NA
+ORG-006-DS-0,Adult,cardoso2019framework,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,oneto2019taking,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,friedler2019comparative,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,chen2018why,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,lipton2018does,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,pleiss2017fairness,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,diciccio2020evaluating,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,speicher2018unified,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,feldman2015certifying,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,maity2021statistical,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,kim2020fact,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,liu2019implicit,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,williamson2019fairness,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,vonkugelgen2021fairness,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""native-country"": ""nationality"", ""age"" : ""age""}",NA
+ORG-006-DS-0,Adult,ngong2020towards,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,No,?,NA
+ORG-006-DS-0,Adult,jabbari2020empirical,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,huan2020fairness,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,zliobaite2015relation,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,islam2021can,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex"", ""native-country"": ""nationality"", ""race"" : ""race""}",NA
+ORG-006-DS-0,Adult,segal2021fairness,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,he2020geometric,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""age"": ""age""}",NA
+ORG-006-DS-0,Adult,sharma2020data,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,goel2018nondiscriminatory,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,raff2018fair,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,zhang2018mitigating,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,No,?,NA
+ORG-006-DS-0,Adult,hu2020fair,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Guessable,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,celis2019classification,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,yang2020fairness,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""sex"": ""sex"", ""race"": ""race"", ""age"": ""age""}",NA
+ORG-006-DS-0,Adult,cho2020fair,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,savani2020intraprocessing,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""gender"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,wu2019cpfairness,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,donini2018empirical,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,quadrianto2017recycling,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,calmon2017optimized,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,xu2020algorithmic,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,zhang2017achieving,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,yurochkin2021sensei,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Guessable,"{""sex"": ""sex"", ""race"": ""race"", ""marital-status"": ""marital_status""}",NA
+ORG-006-DS-0,Adult,vargo2021individually,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Guessable,"{""sex"": ""sex"", ""race"": ""race"",""marital-status"": ""marital_status""}",NA
+ORG-006-DS-0,Adult,chuang2021fair,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,roh2021fairbatch,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,yurochkin2020training,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Guessable,"{""sex"": ""sex"", ""race"": ""race"", ""marital-status"": ""marital_status""}",NA
+ORG-006-DS-0,Adult,baharlouei2020renyi,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex"", ""age"": ""age""}",NA
+ORG-006-DS-0,Adult,lohaus2020too,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,martinez2020minimax,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,roh2020frtrain,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,celis2020data,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,cotter2019training,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,gordaliza2019obtaining,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,wang2019repairing,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,agarwal2018reductions,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-1,ConfoundedAdult,creager2021exchanging,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Guessable,No,Guessable,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,delobelle2020ethical,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,ogura2020convex,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,zafar2017fairness,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,fish2015fair,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Guessable,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,raff2018gradient,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,No,No,No,NA,NA
+ORG-006-DS-0,Adult,mhasawade2021causal,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,perrone2021fair,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,shah2021rawslian,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,sharma2021fairn,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race"", ""age"": ""age""}",NA
+ORG-006-DS-0,Adult,noriegacampero2019active,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""race"": ""race""}",NA
+ORG-006-DS-0,Adult,bakker2019dadi,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,bakker2021beyond,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""race"": ""race""}",NA
+ORG-006-DS-0,Adult,ali2019loss,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-?,NA,ustun2019fairness,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,No,No,Guessable,"{""marital-status"": ""marital_status"", ""sex"": ""sex"", ""native-country"" :""native-country""}",NA
+ORG-006-DS-0,Adult,mukherjee2020two,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,lahoti2020fairness,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,wang2020robust,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""race"": ""race""}",NA
+ORG-006-DS-0,Adult,mozannar2020fair,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-?,NA,kilbertus2018blind,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,No,No,No,NA,NA
+ORG-006-DS-0,Adult,awasthi2021evaluating,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,black2021leaveoneout,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,No,?,NA
+ORG-006-DS-0,Adult,kearns2019empirical,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race"", ""age"": ""age""}",NA
+ORG-006-DS-0,Adult,chouldechova2017fairer,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""marital-status"": ""marital_status"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,hu2020fairmultiple,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""age"": ""age""}",NA
+ORG-006-DS-0,Adult,goel2020importance,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,mandal2020ensuring,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,huang2019stable,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-006-DS-0,Adult,zhang2019group,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Guessable,"{""sex"": ""sex"", ""race"": ""race"", ""nationality"": ""nationality""}",NA
+ORG-006-DS-0,Adult,chzhen2019leveraging,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,No,?,NA
+ORG-006-DS-0,Adult,wang2021fair,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,choi2020group,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-006-DS-0,Adult,ji2020can,ORG-006,ORG-006-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",NA
+ORG-014-DS-0,Arrhythmia,donini2018empirical,ORG-014,ORG-014-01,fair classification,tabular data,DONE,Yes,Guessable,No,Guessable,"{""sex"":""sex""}",NA
+ORG-014-DS-0,Arrhythmia,mary2019fairnessaware,ORG-014,ORG-014-01,fair classification,tabular data,DONE,Yes,Guessable,No,No,"""(e.g. knowledge about the
+ethnic group of an individual or Sex in this experiment)""",NA
+ORG-014-DS-0,Arrhythmia,rezaei2021robust,ORG-014,ORG-014-01,fair classification,tabular data,DONE,Yes,Yes,Not Applicable,Yes,"{""sex"":""sex""}",NA
+ORG-014-DS-0,Arrhythmia,chzhen2019leveraging,ORG-014,ORG-014-01,fair classification,tabular data,DONE,Yes,Yes,No,Guessable,"{""sex"":""sex""}",NA
+ORG-017-DS-0,Bank; Bank Marketing; Marketing,savani2020intraprocessing,ORG-017,ORG-017-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""age"": ""age""}",age >= 25 and age < 60
+ORG-017-DS-2,Bank; Bank Marketing; Marketing,baharlouei2020renyi,ORG-017,ORG-017-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""marital"": ""marital_status""}",NA
+ORG-017-DS-0,Bank; Bank Marketing; Marketing,zafar2017fairness,ORG-017,ORG-017-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""age"": ""age""}",age >= 25 and age < 60
+ORG-017-DS-2,Bank; Bank Marketing; Marketing,diana2021minimax,ORG-017,ORG-017-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""job"": ""profession""}",NA
+ORG-017-DS-2,Bank; Bank Marketing; Marketing,shah2021rawslian,ORG-017,ORG-017-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""age"": ""age""}",?
+ORG-017-DS-0,Bank; Bank Marketing; Marketing,kilbertus2018blind,ORG-017,ORG-017-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""age"": ""age""}",age < 25 or age > 60
+ORG-017-DS-2,Bank; Bank Marketing; Marketing,lipton2018does,ORG-017,ORG-017-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""marital"": ""marital_status""}",marital == married
+ORG-017-DS-0,Bank; Bank Marketing; Marketing,islam2021can,ORG-017,ORG-017-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""age"": ""age"", ""job"": ""employment""}",age >= 35; job: privileged vs. unprivileged
+ORG-017-DS-0,Bank; Bank Marketing; Marketing,ji2020can,ORG-017,ORG-017-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""age"": ""age""}",age >= 25
+ORG-020-DS-0,NA,jiang2021towards,ORG-020,ORG-020-01,fair classification,tabular data,DONE,Yes,No,No,No,?,NA
+ORG-039-DS-0,Communities; Communities and Crime,yang2020fairness,ORG-039,ORG-039-01,fair classification,tabular data,DONE,Yes,No,Yes,Guessable,"{""age"": ""age"", ""sex"":""sex"",""race"":""race""}",NA
+ORG-039-DS-0,Communities; Communities and Crime,Sharifi2019average,ORG-039,ORG-039-01,fair classification,tabular data,DONE,Yes,Not Applicable,Not Applicable,Not Applicable,NA,NA
+ORG-039-DS-0,Communities; Communities and Crime,heidari2018fairness,ORG-039,ORG-039-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""neighborhood"":""race""}",NA
+ORG-039-DS-0,Communities; Communities and Crime,lohaus2020too,ORG-039,ORG-039-01,fair classification,tabular data,DONE,No,NA,NA,NA,NA,NA
+ORG-039-DS-0,Communities; Communities and Crime,cotter2019training,ORG-039,ORG-039-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""racePctAsian"":""race"",""racePctHisp"":""race"",""racepctblack"":""race"",""racePctWhite"":""race""}",NA
+ORG-039-DS-0,Communities; Communities and Crime,creager2019flexibly,ORG-039,ORG-039-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""racePctBlack"": ""race"", ""blackPerCap"": ""race"", ""pctNotSpeakEnglWell"": ""language""}",NA
+ORG-039-DS-0,Communities; Communities and Crime,cotter2018training,ORG-039,ORG-039-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""low-Asian"":""race"", ""high-Asian"":""race"", ""low-Black"":""race"", ""high-Black"":""race"", ""low-Hispanic"":""race"", ""high-Hispanic"":""race"", ""low-White"":""race"", ""high-White"":""race""}",NA
+ORG-039-DS-0,Communities; Communities and Crime,kearns2019empirical,ORG-039,ORG-039-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""racePctWhite"":""race"", ""racePctBlack"":""race""}",NA
+ORG-039-DS-0,Communities; Communities and Crime,kearns2018preventing,ORG-039,ORG-039-01,fair classification,tabular data,DONE,Yes,Yes,No,No,18 - unsure which,NA
+ORG-039-DS-0,Communities; Communities and Crime,mandal2020ensuring,ORG-039,ORG-039-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""racePctWhite"":""race""}",NA
+ORG-039-DS-0,Communities; Communities and Crime,jagielski2019differentially,ORG-039,ORG-039-01,fair classification,tabular data,DONE,Yes,Yes,Not Applicable,Not Applicable,abstract protected,NA
+ORG-039-DS-0,Communities; Communities and Crime,lan2017discriminatory,ORG-039,ORG-039-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""racePctBlack"":""race""}",NA
+ORG-040-DS-0,COMPAS,he2020geometric,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""race"": ""race""}",process-black-other
+ORG-040-DS-0,COMPAS,sharma2020data,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Guessable,Guessable,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,goel2018nondiscriminatory,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Guessable,No,Guessable,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-1,COMPAS,oneto2019taking,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""sex"": ""gender"", ""race"": ""race""}",none
+ORG-040-DS-0,COMPAS,celis2019classification,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,canetti2019from,ORG-040,ORG-040-01,fair classification,tabular data,DONE,No,Yes,Not Applicable,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,cho2020fair,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,savani2020intraprocessing,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"":""gender"", ""race"":""race""}",process-white-other
+ORG-040-DS-1,COMPAS,donini2018empirical,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""ethnicity"": ""race""}",process-white-other
+ORG-040-DS-0,COMPAS,heidari2018fairness,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""race"": ""race""}",not-mentioned
+ORG-040-DS-0,COMPAS,russell2017when,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""race"":""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,quadrianto2017recycling,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,calmon2017optimized,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-2,COMPAS,celis2020data,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""race"": ""race"", ""sex"": ""gender""}",process-white-other
+ORG-040-DS-0,COMPAS,diciccio2020evaluating,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",not-mentioned
+ORG-040-DS-0,COMPAS,xu2020algorithmic,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""race"":""race""}",process-white-other
+ORG-040-DS-0,COMPAS,vargo2021individually,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"":""gender"", ""race"":""race""}",process-white-other
+ORG-040-DS-0,COMPAS,roh2021fairbatch,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""sex"": ""gender""}",process-white-other
+ORG-040-DS-0,COMPAS,maity2021statistical,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,lohaus2020too,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""race"": ""race""}",process-white-other
+ORG-040-DS-0,COMPAS,roh2020frtrain,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""sex"": ""sex""}",process-white-other
+ORG-040-DS-0,COMPAS,cotter2019training,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""sex"": ""sex"", ""race"": ""race""}",filter-black-white
+ORG-040-DS-1,COMPAS,mary2019fairnessaware,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Guessable,"{""ethnicity"": ""race""}",process-white-other
+ORG-040-DS-6,COMPAS (compas_proxy_data.csv),wang2019repairing,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""race"": ""race""}",process-white-other
+ORG-040-DS-0,COMPAS,delobelle2020ethical,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,ogura2020convex,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""race"": ""race""}",process-black-other
+ORG-040-DS-0,COMPAS,lum2016statistical,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,Yes,Yes,"{""race"": ""race""}",filter-black-white-hispanic
+ORG-040-DS-0,COMPAS,zafar2017fairnessbeyond,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-?,NA,berk2017convex,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,wadsworth2018achieving,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,No,Guessable,"{""race"":""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,diana2021minimax,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""sex"", ""race"": ""race""}",filter-black-white-hispanic-other
+ORG-040-DS-?,NA,perrone2021fair,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""race"": ""race""}",process-white-other
+ORG-040-DS-0,COMPAS,ali2021accounting,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,cardoso2019framework,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Guessable,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-2,COMPAS,mcnamara2019equalized,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""race"": ""race""}",process-black-other
+ORG-040-DS-?,NA,kasy2021fairness,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Not Applicable,Yes,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,taskesen2021statistical,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""race"":""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,friedler2019comparative,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-?,NA,wick2019unlocking,ORG-040,ORG-040-01,fair classification,tabular data,DONE,No,No,No,No,NA,not-mentioned
+ORG-040-DS-?,NA,zhang2018equality,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,No,Guessable,"{""race"":""race""}",filter-black-white
+ORG-040-DS-?,NA,pleiss2017fairness,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Guessable,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,chaibubneto2020causal,ORG-040,ORG-040-01,fair classification,tabular data,DONE,No,Not Applicable,Not Applicable,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,speicher2018unified,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"":""gender"", ""race"":""race""}",filter-black-white-hispanic
+ORG-040-DS-0,COMPAS,lahoti2020fairness,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",process-black-white-other
+ORG-040-DS-0,COMPAS,corbettdavies2017algorithmic,ORG-040,ORG-040-01,fair classification,tabular data,DONE,No,Yes,Not Applicable,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,liu2019implicit,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",filter-black-white*
+ORG-040-DS-?,NA,agarwal2018reductions,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Guessable,No,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-?,NA,ngong2020towards,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""race"": ""race""}",not-mentioned
+ORG-040-DS-4,COMPAS (Kaggle),jabbari2020empirical,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Guessable,Guessable,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-?,NA,chouldechova2017fair,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,grgichlaca2016case,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,Yes,Not Applicable,NA,not-mentioned
+ORG-040-DS-0,COMPAS,islam2021can,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex"", ""race"": ""race""}",process-black-white-hispanic-other
+ORG-040-DS-0,COMPAS,lamy2019noisetolerant,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-1,COMPAS,chzhen2019leveraging,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Guessable,"{""ethnicity"": ""race""}",process-white-other
+ORG-040-DS-?,NA,kilbertus2018blind,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,No,?,not-mentioned
+ORG-040-DS-5,COMPAS (compas_train/_test/_val.csv),mandal2020ensuring,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""race"": ""race""}",unclear
+ORG-040-DS-?,NA,rezaei2021robust,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""race"": ""race""}",not-mentioned
+ORG-040-DS-?,NA,biswas2021ensuring,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,zhang2020how,ORG-040,ORG-040-01,fair classification,tabular data,DONE,No,NA,NA,NA,NA,not-mentioned
+ORG-040-DS-0,COMPAS,valera2018enhancing,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""race"":""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,zafar2017from,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""race"":""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,ustun2019fairness,ORG-040,ORG-040-01,fair classification,tabular data,DONE,No,NA,NA,NA,NA,not-mentioned
+ORG-040-DS-0,COMPAS,goel2020importance,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,wang2021fair,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"":""gender"", ""race"":""race""}",filter-black-white
+ORG-040-DS-4,COMPAS (Kaggle),choi2020group,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""Ethnic_Code_Text"": ""ethnicity""}",process-white-other
+ORG-040-DS-0,COMPAS,slack2020fairness,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"":""gender"", ""race"":""race""}",process-black-other
+ORG-040-DS-0,COMPAS,slack2019fairness,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"":""gender"", ""race"":""race""}",process-black-other
+ORG-040-DS-0,COMPAS,chouldechova2017fairer,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,No,Yes,Yes,"{""race"": ""race""}",filter-black-white
+ORG-040-DS-0,COMPAS,zhang2017identifying,ORG-040,ORG-040-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Guessable,"{""sex"":""gender"", ""race"":""race""}",filter-black-white
+ORG-042-DS-0,INEC-ENAHO-2015,noriegacampero2020algorithmic,ORG-042,ORG-042-01,fair classification,tabular data,DONE,Yes,No,No,No,?,NA
+ORG-043-DS-0,default of credit card clients,cho2020fair,ORG-043,ORG-043-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""X2"":""sex""}",NA
+ORG-043-DS-0,default of credit card clients,berk2017convex,ORG-043,ORG-043-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""X2"":""sex""}",NA
+ORG-043-DS-0,default of credit card clients,wang2020robust,ORG-043,ORG-043-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Guessable,"{""X2"":""sex""}",NA
+ORG-043-DS-0,default of credit card clients,lipton2018does,ORG-043,ORG-043-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""X2"":""sex""}",NA
+ORG-052-DS-0,Drug; Drug consumption (quantified),donini2018empirical,ORG-052,ORG-052-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""ethnicity"": ""ethnicity""}",NA
+ORG-052-DS-0,Drug; Drug consumption (quantified),mary2019fairnessaware,ORG-052,ORG-052-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""ethnicity"": ""ethnicity""}",NA
+ORG-052-DS-0,Drug; Drug consumption (quantified),chzhen2019leveraging,ORG-052,ORG-052-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""ethnicity"": ""ethnicity""}",NA
+ORG-052-DS-0,Drug; Drug consumption (quantified),rezaei2021robust,ORG-052,ORG-052-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""ethnicity"": ""race""}",NA
+ORG-055-DS-0,NA,agarwal2018reductions,ORG-055,ORG-055-01,fair classification,tabular data,DONE,Yes,Yes,No,No,?,NA
+ORG-055-DS-0,NA,xu2020algorithmic,ORG-055,ORG-055-01,fair classification,tabular data,DONE,Yes,Yes,No,No,?,NA
+ORG-055-DS-0,NA,zhang2017achieving,ORG-055,ORG-055-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-055-DS-0,NA,lohaus2020too,ORG-055,ORG-055-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex""}",NA
+ORG-055-DS-0,NA,cardoso2019framework,ORG-055,ORG-055-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""sex"": ""sex""}",NA
+ORG-066-DS-0,creditscore; FICO credit scores,hardt2016equality,ORG-066,ORG-066-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""Non- Hispanic white"":""race"", ""Black"":""race"", ""Hispanic"":""race"", ""Asian"":""race""}",NA
+ORG-066-DS-0,creditscore; FICO credit scores,liu2020disparate,ORG-066,ORG-066-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""Non- Hispanic white"":""race"", ""Black"":""race"", ""Hispanic"":""race"", ""Asian"":""race""}",NA
+ORG-066-DS-0,creditscore; FICO credit scores,zhang2020how,ORG-066,ORG-066-01,fair classification,tabular data,DONE,No,NA,NA,NA,NA,NA
+ORG-066-DS-0,creditscore; FICO credit scores,liu2018delayed,ORG-066,ORG-066-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""Non- Hispanic white"":""race"", ""Black"":""race""}",NA
+ORG-066-DS-0+1,NA,creager2020causal,ORG-066,ORG-066-01,fair classification,tabular data,DONE,No,Not Applicable,No,Guessable,"{""race"":""race""}",NA
+ORG-072-DS-0,German; German Credit; Credit,he2020geometric,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"": ""gender""}",NA
+ORG-072-DS-0,German; German Credit; Credit,sharma2020data,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""age"": ""age""}",NA
+ORG-072-DS-0,German; German Credit; Credit,raff2018fair,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""age"": ""age""}",NA
+ORG-072-DS-0,German; German Credit; Credit,celis2019classification,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"":""gender""}",NA
+ORG-072-DS-0,German; German Credit; Credit,yang2020fairness,ORG-072,ORG-072-01,fair classification,tabular data,DONE,No,NA,NA,NA,NA,NA
+ORG-072-DS-0,German; German Credit; Credit,donini2018empirical,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,No,No,No,?,NA
+ORG-072-DS-0,German; German Credit; Credit,vargo2021individually,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""age"": ""age""}",NA
+ORG-072-DS-0,German; German Credit; Credit,baharlouei2020renyi,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"":""gender"", ""marital status"": ""marital_status""}",NA
+ORG-072-DS-0,German; German Credit; Credit,lohaus2020too,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,No,No,No,NA,NA
+ORG-072-DS-0,German; German Credit; Credit,martinez2020minimax,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"":""gender""}",NA
+ORG-072-DS-0,German; German Credit; Credit,mary2019fairnessaware,ORG-072,ORG-072-01,fair classification,tabular data,DONE,No,NA,NA,NA,NA,NA
+ORG-072-DS-0,German; German Credit; Credit,delobelle2020ethical,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""age"": ""age""}",NA
+ORG-072-DS-0,German; German Credit; Credit,raff2018gradient,ORG-072,ORG-072-01,fair classification,tabular data,DONE,No,NA,NA,NA,NA,NA
+ORG-072-DS-0,German; German Credit; Credit,perrone2021fair,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"":""gender""}",NA
+ORG-072-DS-3,german_credit_onehot,sharma2021fairn,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""age"": ""age""}",NA
+ORG-072-DS-0,German; German Credit; Credit,friedler2019comparative,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"":""sex"", ""age"":""age""}",NA
+ORG-072-DS-0,German; German Credit; Credit,feldman2015certifying,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""age"": ""age""}",NA
+ORG-072-DS-0,German; German Credit; Credit,zhang2020joint,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Guessable,"{""age"": ""age""}",NA
+ORG-072-DS-0,German; German Credit; Credit,noriegacampero2019active,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Guessable,Yes,Yes,"{""age"": ""age""}",NA
+ORG-072-DS-1,German; German Credit; Credit,kilbertus2018blind,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,No,No,No,NA,NA
+ORG-072-DS-0,German; German Credit; Credit,black2021leaveoneout,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Guessable,No,Guessable,"{""age"": ""age""}",NA
+ORG-072-DS-0,German; German Credit; Credit,goel2020importance,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"":""gender""}",NA
+ORG-072-DS-0,German; German Credit; Credit,chzhen2019leveraging,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,No,No,No,?,NA
+ORG-072-DS-0,German; German Credit; Credit,wang2021fair,ORG-072,ORG-072-01,fair classification,tabular data,DONE,No,NA,NA,Yes,"{""sex"":""gender""}",NA
+ORG-072-DS-0,German; German Credit; Credit,choi2020group,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-072-DS-0,German; German Credit; Credit,ji2020can,ORG-072,ORG-072-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""sex"":""gender"", ""age"":""age""}",NA
+ORG-081-DS-0,Heart Disease,pleiss2017fairness,ORG-081,ORG-081-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Guessable,"{""age"": ""age""}",NA
+ORG-081-DS-0,Heart Disease,noriegacampero2019active,ORG-081,ORG-081-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""age"": ""age""}",NA
+ORG-082-DS-0,HHP,raff2018fair,ORG-082,ORG-082-03,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""age ≥ 65"":""age""}",NA
+ORG-082-DS-0,HHP,raff2018gradient,ORG-082,ORG-082-03,fair classification,tabular data,DONE,No,NA,NA,NA,NA,NA
+ORG-082-DS-0,HHP,madras2018predict,ORG-082,ORG-082-03,fair classification,tabular data,DONE,Yes,Yes,Guessable,Yes,"{""age"":""age""}",NA
+ORG-082-DS-0,HHP,islam2021can,ORG-082,ORG-082-03,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""age"":""age"", ""sex"":""gender""}",NA
+ORG-084-DS-0+1,NA,chen2019fairness,ORG-084,ORG-084-01,fair classification,tabular data,DONE,No,Yes,Not Applicable,Yes,"{""Black"": ""race"", ""White"": ""race"", ""Hispanic"": ""race"", ""API"": ""race""}",process+filter-black-white-hispanic-API
+ORG-084-DS-0+1,NA,kallus2020assessing,ORG-084,ORG-084-01,fair classification,tabular data,DONE,No,Yes,Not Applicable,Yes,"{""race"": ""race""}",process+filter-black-white-API
+ORG-109-DS-0,Law_School,yang2020fairness,ORG-109,ORG-109-01,fair classification,tabular data,DONE,Yes,No,Guessable,No,NA,NA
+ORG-109-DS-0,Law_School,cho2020fair,ORG-109,ORG-109-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""white"":""race"",""non-white"":""race""}",NA
+ORG-109-DS-0,Law_School,russell2017when,ORG-109,ORG-109-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""white"":""race"",""black"":""race""}",NA
+ORG-109-DS-0,Law_School,agarwal2018reductions,ORG-109,ORG-109-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""white"":""race"",""black"":""race""}",NA
+ORG-109-DS-0,Law_School,berk2017convex,ORG-109,ORG-109-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"":""gender""}",NA
+ORG-109-DS-0,Law_School,kearns2019empirical,ORG-109,ORG-109-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""race"":""race"", ""income"":""income"", ""age"":""age"", ""sex"":""gender""}",NA
+ORG-109-DS-0,Law_School,lahoti2020fairness,ORG-109,ORG-109-01,fair classification,tabular data,DONE,Yes,Yes,No,Guessable,"{""sex"":""sex"", ""race"":""race""}",NA
+ORG-109-DS-0,Law_School,lamy2019noisetolerant,ORG-109,ORG-109-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""white"":""race"",""black"":""race""}",NA
+ORG-109-DS-0,Law_School,black2020fliptest,ORG-109,ORG-109-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Guessable,"{""sex"":""gender"", ""race"":""race""}",NA
+ORG-109-DS-0,Law_School,kusner2017counterfactual,ORG-109,ORG-109-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"":""gender"", ""race"":""race""}",NA
+ORG-109-DS-0,Law_School,mandal2020ensuring,ORG-109,ORG-109-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""white"":""race"",""non-white"":""race""}",NA
+ORG-109-DS-0,Law_School,wang2021fair,ORG-109,ORG-109-01,fair classification,tabular data,DONE,Yes,No,No,Yes,"{""white"":""race"",""black"":""race""}",NA
+ORG-111-DS-0,City_Attorney,rodolfa2020case,ORG-111,ORG-111-01,fair classification,tabular data,DONE,Yes,Guessable,Guessable,Yes,"{""white"":""race"",""black"":""race"",""hispanic"":""race"",""other"":""race"",""unknown"":""race""}",NA
+ORG-112-DS-0,"MEPS (Panel 19, FY2015)",singh2019understanding,ORG-112,ORG-112-02,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""RACE"": ""race""}",process-white-other
+ORG-112-DS-0,"MEPS (Panel 19, FY2015)",biswas2021ensuring,ORG-112,ORG-112-02,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""RACE"": ""race""}",NA
+ORG-112-DS-2,"MEPS (Panel 21, FY2016)",sharma2021fairn,ORG-112,ORG-112-02,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""RACE"": ""race""}",process-white-other
+ORG-131-DS-0,Nursery,romano2020achieving,ORG-131,ORG-131-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""finance"": ""property""}",NA
+ORG-145-DS-0+1,NA,noriegacampero2020algorithmic,ORG-145,ORG-145-01,fair classification,tabular data,DONE,Yes,Yes,Guessable,No,NA,NA
+ORG-149-DS-0,Pymetrics Candidate Screening,wilson2021building,ORG-149,ORG-149-01,fair classification,tabular data,DONE,Yes,No,No,No,NA,NA
+ORG-155-DS-0,NA,williams2019quantification,ORG-155,ORG-155-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Guessable,"{""?race"": ""race"", ""?age"": ""age"", ""?gender"": ""gender""}",NA
+ORG-157-DS-0,ricci,feldman2015certifying,ORG-157,ORG-157-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""Non-White"": ""race"", ""White"": ""race""}",NA
+ORG-157-DS-0,ricci,friedler2019comparative,ORG-157,ORG-157-01,fair classification,tabular data,DONE,Yes,Yes,No,Guessable,"{""Non-White"": ""race"", ""White"": ""race""}",NA
+ORG-157-DS-0,ricci,ji2020can,ORG-157,ORG-157-01,fair classification,tabular data,DONE,Yes,No,No,Guessable,"{""Non-White"": ""race"", ""White"": ""race""}",NA
+ORG-174-DS-0,State Court Processing Statistics,green2019disparate,ORG-174,ORG-174-01,fair classification,tabular data,DONE,Yes,Guessable,No,Yes,"{""RACE"": ""race""}",filter-black-white
+ORG-176-DS-0,"Stop, Question and Frisk Data",zafar2017from,ORG-176,ORG-176-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""SUSPECT_SEX"": ""sex""}",NA
+ORG-176-DS-0,"Stop, Question and Frisk Data",kallus2018residual,ORG-176,ORG-176-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""SUSPECT_RACE_DESCRIPTION"": ""race""}",NA
+ORG-176-DS-0,"Stop, Question and Frisk Data",kilbertus2018blind,ORG-176,ORG-176-01,fair classification,tabular data,DONE,Yes,No,No,No,NA,NA
+ORG-176-DS-0,"Stop, Question and Frisk Data",goel2017combatting,ORG-176,ORG-176-01,fair classification,tabular data,DONE,Yes,No,Guessable,No,NA,NA
+ORG-176-DS-0,"Stop, Question and Frisk Data",ali2021accounting,ORG-176,ORG-176-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""SUSPECT_RACE_DESCRIPTION"": ""race""}",NA
+ORG-177-DS-0,Strategic_Subject_List_-_Historical,black2020fliptest,ORG-177,ORG-177-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Not Applicable,race is intentionally used (and maybe not protected?),NA
+ORG-178-DS-0,Student; Student Performance,kearns2019empirical,ORG-178,ORG-178-02,fair classification,tabular data,DONE,Yes,Guessable,Guessable,Yes,"{""sex"":""gender"",""age"":""age"",""romantic"":""relationship_status"",""Dalc"":""alcohol_consumption"",""Walc"":""alcohol_consumption""}",NA
+ORG-180-DS-0,cancer,sabato2020bounding,ORG-180,ORG-180-01,fair classification,tabular data,DONE,Yes,Yes,Yes,No,NA,NA
+ORG-184-DS-0,generate_synthetic_data,zafar2017fairness,ORG-184,ORG-184-01,fair classification,tabular data,DONE,Yes,Not Applicable,Not Applicable,Not Applicable,NA,NA
+ORG-184-DS-0,generate_synthetic_data,roh2020frtrain,ORG-184,ORG-184-01,fair classification,tabular data,DONE,Yes,Not Applicable,Not Applicable,Not Applicable,NA,NA
+ORG-184-DS-0,generate_synthetic_data,zafar2017from,ORG-184,ORG-184-01,fair classification,tabular data,DONE,Yes,Not Applicable,Not Applicable,Not Applicable,NA,NA
+ORG-184-DS-0,generate_synthetic_data,ali2019loss,ORG-184,ORG-184-01,fair classification,tabular data,DONE,Yes,Not Applicable,Not Applicable,Not Applicable,NA,NA
+ORG-184-DS-0,generate_synthetic_data,slack2019fair,ORG-184,ORG-184-01,fair classification,tabular data,DONE,Yes,Not Applicable,Not Applicable,Not Applicable,NA,NA
+ORG-184-DS-0,generate_synthetic_data,slack2020fairness,ORG-184,ORG-184-01,fair classification,tabular data,DONE,Yes,Not Applicable,Not Applicable,Not Applicable,NA,NA
+ORG-184-DS-0,generate_synthetic_data,kilbertus2018blind,ORG-184,ORG-184-01,fair classification,tabular data,DONE,Yes,Not Applicable,Not Applicable,Not Applicable,NA,NA
+ORG-186-DS-0,Lipton synthetic hiring dataset,lipton2018does,ORG-186,ORG-186-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-186-DS-0,Lipton synthetic hiring dataset,black2020fliptest,ORG-186,ORG-186-01,fair classification,tabular data,DONE,Yes,Yes,Yes,Yes,"{""sex"": ""sex""}",NA
+ORG-187-DS-0,synth,donini2018empirical,ORG-187,ORG-187-01,fair classification,tabular data,DONE,Yes,Not Applicable,Not Applicable,Not Applicable,NA,NA
+ORG-187-DS-0,synth,williamson2019fairness,ORG-187,ORG-187-01,fair classification,tabular data,DONE,Yes,Not Applicable,Not Applicable,Not Applicable,NA,NA
+ORG-200-DS-0,US Census Data (1990),sabato2020bounding,ORG-200,ORG-200-04,fair classification,tabular data,DONE,Yes,No,Yes,Guessable,"{""powstate"": ""geography""}",NA
+ORG-203-DS-0,U.S. Harmonized Tariff Schedules (HTS),luong2016classification,ORG-203,ORG-203-01,fair classification,tabular data,DONE,No,Not Applicable,Not Applicable,Not Applicable,NA,NA
+ORG-204-DS-0,NA,lee2020evaluation,ORG-204,ORG-204-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""sex"":""gender"", ""URM"":""race"", ""non-URM"":""race""}",NA
+ORG-209-DS-0,clinical_annotations (Warfarin Dosage),kallus2020assessing,ORG-209,ORG-209-01,fair classification,tabular data,DONE,Yes,Yes,No,Yes,"{""race"":""race""}",NA

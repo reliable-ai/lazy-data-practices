@@ -1,0 +1,10 @@
+new_dataset_id,col_protected,processing_protected
+ORG-017-DS-0,"{""age"": ""age""}",age >= 25 and age < 60
+ORG-017-DS-2,"{""marital"": ""marital_status""}",
+ORG-017-DS-0,"{""age"": ""age""}",age >= 25 and age < 60
+ORG-017-DS-2,"{""job"": ""profession""}",
+ORG-017-DS-2,"{""age"": ""age""}",?
+ORG-017-DS-0,"{""age"": ""age""}",age < 25 or age > 60
+ORG-017-DS-2,"{""marital"": ""marital_status""}",marital == married
+ORG-017-DS-0,"{""age"": ""age"", ""job"": ""employment""}",age >= 35; job: privileged vs. unprivileged
+ORG-017-DS-0,"{""age"": ""age""}",age >= 25

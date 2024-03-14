@@ -1,0 +1,902 @@
+---
+title: "Section 5: Opaque Preprocessing"
+subtitle: "Lack of Reporting & Standardization in Dataset Usage"
+format:
+  html:
+    toc: true
+    execute:
+      fig-format: svg
+  pdf:
+    toc: true
+    keep-tex: true
+---
+
+```{r setup}
+source("../R/setup.R")
+```
+
+# Load Data
+
+```{r}
+papers <- load_papers()
+```
+
+# Helper Function(s)
+
+```{r}
+save_reproducibility <- function (data, name = NULL) {
+  dir <- file.path(data_dir, "intermediate", "reproducibility")
+  if (is.null(name)) { name <- enexpr(data) }
+  dir.create(dir, showWarnings = F)
+  write_csv(
+    data,
+    file.path(dir, paste0(name, ".csv"))
+  )
+}
+```
+
+# Analysis 1: Lack of Documentation in Usage
+
+Exclude all non-prediction papers from this analysis, as it's hard to make them fit into the "box" of our annotation scheme.
+
+```{r}
+papers %>% count(is_prediction_task)
+```
+
+```{r}
+papers_reproducibility <- papers %>% 
+  filter(is_prediction_task == "Yes")
+```
+
+## Quality of Information Available
+
+```{r}
+info_quality_counts <- papers_reproducibility %>% 
+  select(starts_with("info_")) %>%
+  pivot_longer(everything()) %>% 
+  count(name, value) %>% 
+  mutate(
+    # Add explicit order
+    value = factor(
+      value,
+      levels = c("Yes", "Guessable", "No", "Not Applicable")
+    ),
+    name = case_match(
+      name,
+      "info_target" ~ "Target (y)",
+      "info_protected" ~ "Protected Attributes (S)",
+      "info_features" ~ "Features (X)"
+    )
+  ) %>% 
+  group_by(name) %>% 
+  mutate(
+    frac = n / sum(n),
+    sum_n = sum(n)
+  ) %>% 
+  ungroup()
+info_quality_counts
+```
+
+```{r fig-bar-enough-info}
+#| fig-width: 7
+#| fig-height: 3.5
+fig_bar_enough_info <- info_quality_counts %>% 
+  ggplot(aes(
+    x = n,
+    y = name,
+    fill = value
+  )) +
+  geom_bar(position = position_fill(reverse = TRUE), stat = "identity") + 
+  scale_fill_manual(
+    values = c(
+      "Guessable" = "#ff7f00",
+      "No" = "#e41a1c",
+      "Yes" = "#4daf4a",
+      "Not Applicable" = "#377eb8"
+    )
+  ) +
+  labs(
+    x = "",
+    y = "",
+    fill = "Enough information\nto reconstruct usage?"
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.major.y = element_blank()
+  )
+fig_bar_enough_info
+```
+
+## Availability of Code
+
+```{r}
+code_availability_counts <- tibble(
+  code_available = c("Yes", "No") %>% factor(levels = c("Yes", "No")),
+  n = c(sum(!is.na(papers$code_url)), sum(is.na(papers$code_url))),
+) %>% 
+  mutate(
+    frac = n / sum(n)
+  )
+code_availability_counts
+```
+
+```{r fig-bar-code-availability}
+#| fig-width: 5
+#| fig-height: 2
+fig_bar_code_availability <- code_availability_counts %>% 
+  ggplot(aes(
+    x = n,
+    y = "",
+    fill = code_available
+  )) +
+  geom_bar(position = position_fill(reverse = TRUE), stat = "identity") +
+  scale_fill_manual(
+    values = c(
+      "No" = "#e41a1c",
+      "Yes" = "#4daf4a"
+    )
+  ) +
+  labs(
+    x = "",
+    y = "",
+    fill = "Code of analyses available?"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "top",
+    panel.grid.major.y = element_blank()
+  )
+fig_bar_code_availability
+```
+
+## Combined Figure
+
+```{r fig-bar-reproducibility-combined}
+library(patchwork)
+
+(
+  fig_bar_enough_info
+  /
+    (
+      # Manually adjust plot to work in the combined setting
+      fig_bar_code_availability +
+        scale_y_discrete(labels = "Source Code") +
+        theme(legend.position = "right") +
+        labs(fill = "Source Code of\nanalyses available?")
+    )
+) +
+  plot_layout(heights = c(3, 1)) +
+  plot_annotation(tag_levels = c('A'))
+```
+
+# Analysis 2: Lack of Standardization
+
+## Demonstrate Lack of Standardization
+
+Show lack of standardization in a kind of sankey / tree diagram, showing how choices differ at each step.
+
+```{r}
+bank_configurations_raw <- papers %>% 
+  # Bank dataset
+  filter(org_id == "ORG-017") %>% 
+  # Select columns we actually care abt
+  select(new_dataset_id, col_protected, protected_processing_standard) %>% 
+  # Normalize protected_processing_standard
+  mutate(
+    protected_processing_standard = case_match(
+      protected_processing_standard,
+      NA ~ "none",
+      # Note: Not *exactly* the same, but close enough?
+      "age < 25 or age > 60" ~ "age >= 25 and age < 60",
+      .default = protected_processing_standard
+    )
+  ) %>% 
+  mutate(across(everything(), as.factor))
+bank_configurations_wide <- bank_configurations_raw %>% 
+  count(pick(everything()))
+bank_configurations_wide
+```
+
+Configurations data in long format for a sankey diagram that is NOT converging again, so it will create a tree.
+
+```{r}
+bank_configurations_long_tree <- rbind(
+  bank_configurations_raw %>% 
+    count(new_dataset_id) %>% 
+    transmute(
+      from = "Bank",
+      to = new_dataset_id,
+      n
+    ),
+  bank_configurations_raw %>% 
+    count(new_dataset_id, col_protected) %>%
+    transmute(
+      from = new_dataset_id,
+      to = paste(new_dataset_id, col_protected, sep = "-"),
+      n
+    ),
+  bank_configurations_raw %>% 
+    count(new_dataset_id, col_protected, protected_processing_standard) %>%
+    transmute(
+      from = paste(new_dataset_id, col_protected, sep = "-"),
+      to = paste(new_dataset_id, col_protected, protected_processing_standard, sep = "-"),
+      n
+    )
+)
+save_reproducibility(bank_configurations_long_tree)
+show(bank_configurations_long_tree)
+```
+
+The generated dataset `bank_configurations_long_tree` can be passed to <https://app.rawgraphs.io/> to create a Sankey diagram.
+
+## Impact of Lack of Standardization on Fairness
+
+Here we check how the lack of standardization affects (fairness) outcomes.
+
+```{r load_bank_results_raw}
+library(jsonlite)
+bank_results_raw <- read_csv(file.path(data_dir, "raw", "bank-analysis-results.csv")) %>% 
+  select(- ...1) %>% 
+  mutate(
+    settings = settings %>% 
+      str_replace_all("'", "\"") %>% 
+      map(~ fromJSON(.) %>% paste(collapse = "-&-")) %>%
+      unlist(),
+    base_rates = base_rates %>% 
+      str_replace_all(fixed("("), "\"") %>% 
+      str_replace_all(fixed(")"), "\"") %>% 
+      map(~ fromJSON(.))
+  )
+```
+
+```{r}
+settings_to_letters <- . %>% 
+  case_match(
+      "ORG-017-DS-0-&-job_and_age-&-age >= 35; job: privileged vs. unprivileged" ~ "a",
+      "ORG-017-DS-0-['job_and_age']-age >= 35; job: privileged vs. unprivileged" ~ "a",
+      "ORG-017-DS-0-&-age-&-age >= 25 and age < 60" ~ "b",
+      "ORG-017-DS-0-['age']-age >= 25 and age < 60" ~ "b",
+      "ORG-017-DS-0-&-age-&-age >= 25" ~ "c",
+      "ORG-017-DS-0-['age']-age >= 25" ~ "c",
+      "ORG-017-DS-2-&-age-&-?" ~ "d",
+      "ORG-017-DS-2-['age']-?" ~ "d",
+      "ORG-017-DS-2-&-job-&-none" ~ "e",
+      "ORG-017-DS-2-['job']-none" ~ "e",
+      "ORG-017-DS-2-&-marital-&-marital == married" ~ "f",
+      "ORG-017-DS-2-['marital']-marital == married" ~ "f",
+      "ORG-017-DS-2-&-marital-&-none" ~ "g",
+      "ORG-017-DS-2-['marital']-none" ~ "g"
+  ) %>% 
+    factor(levels = letters[1:7])
+```
+
+```{r}
+stopifnot(
+  bank_results_raw %>% 
+    transmute(
+      settings,
+      sett_lett = settings_to_letters(settings)
+    ) %>%
+    filter(
+      !(sett_lett %in% letters)
+    ) %>% 
+    nrow() == 0
+)
+```
+
+```{r load_bank_rates}
+bank_rates <- bank_results_raw %>% 
+  distinct(settings, base_rates) %>% 
+  mutate(
+    names = base_rates %>% 
+      map(~ names(.)),
+    values = base_rates %>% 
+      map(~ unlist(.))
+  ) %>% 
+  unnest(c(names, values)) %>% 
+  select(-base_rates) %>% 
+  mutate(
+    names = names %>% 
+      str_replace_all("', ", "-") %>% 
+      str_remove_all("'") %>% 
+      str_remove_all(",") %>% 
+      str_trim()
+  )
+bank_rates
+```
+
+```{r fig_bank_rates, fig.width=6, fig.height=5}
+bank_rates %>% 
+  ggplot(aes(
+    x = names,
+    y = values
+  )) +
+  geom_col() +
+  facet_wrap(~ settings_to_letters(settings), scales = "free") +
+  theme(
+    axis.ticks.x = element_blank(),
+    axis.text.x = element_blank()
+  )
+```
+
+Actually run an analysis for the different versions we see and look at how much they change.
+
+```{r load_bank_results}
+bank_results <- bank_results_raw %>% 
+  select(-base_rates)
+```
+
+```{r}
+bank_results %>% 
+  group_by(settings) %>% 
+  arrange(equalized_odds_difference) %>% 
+  slice(1)
+```
+
+```{r}
+bank_results %>% 
+  group_by(settings) %>% 
+  arrange(f1) %>% 
+  slice(1)
+```
+
+```{r}
+bank_results %>% 
+  group_by(settings) %>% 
+  arrange(accuracy) %>% 
+  slice(1)
+```
+
+### Overall Variation
+
+```{r fig-hist-choices-variation}
+#| fig-width: 8
+#| fig-height: 4
+bank_results %>%
+  select(-count) %>% 
+  select(model, settings, where(is.numeric)) %>% 
+  pivot_longer(c(-model, -settings)) %>% 
+  mutate(
+    metric_group = case_match(
+      name,
+      "accuracy" ~ "Performance",
+      "balanced accuracy" ~ "Performance",
+      "f1" ~ "Performance",
+      "equalized_odds_difference" ~ "Fairness",
+      "equalized_odds_ratio" ~ "Fairness",
+      "demographic_parity_difference" ~ "Fairness",
+      "demographic_parity_ratio" ~ "Fairness",
+      "true positive rate" ~ "Confusion",
+      "false positive rate" ~ "Confusion",
+      "true negative rate" ~ "Confusion",
+      "false negative rate" ~ "Confusion"
+    ),
+    name = name %>% 
+      str_replace_all("_", " ") %>% 
+      str_replace_all("demographic", "dem.") %>% 
+      str_replace_all("equalized", "eq.") %>% 
+      str_to_title() %>% 
+      factor(levels = c(
+        "True Positive Rate",
+        "False Positive Rate",
+        "True Negative Rate",
+        "False Negative Rate",
+        "Eq. Odds Difference",
+        "Eq. Odds Ratio",
+        "Dem. Parity Difference",
+        "Dem. Parity Ratio",
+        "Accuracy",
+        "Balanced Accuracy",
+        "F1"
+      ))
+  ) %>% 
+  filter(!is.na(metric_group)) %>% 
+  ggplot(aes(
+    x = value,
+    fill = metric_group
+  )) +
+  geom_histogram() +
+  facet_wrap(. ~ name, scales = "free_y") +
+  theme_minimal() +
+  labs(
+    x = "",
+    y = "Count",
+    fill = ""
+  ) +
+  scale_fill_brewer(palette = "Set1")
+```
+
+### Correlation of Models in Different Settings
+
+Sanity checks:
+
+```{r}
+# Double check that there's no duplicate values
+stopifnot(
+  (bank_results %>% 
+    count(settings, model, seed) %>% 
+    pull(n) %>%
+    max()
+  ) == 1
+)
+
+stopifnot(
+  # There are 15 models and they should always use the same data version
+  # However sometimes two different settings may use the same data version,
+  # that's why we use modulo here
+  all(
+    bank_results %>% 
+      count(hash_train, hash_test) %>% 
+      pull(n) %% 15 == 0
+  )
+)
+```
+
+Compute Spearman rank correlation between rank of different model's in the configuration settings
+
+```{r}
+compute_ranks <- function(
+    data,
+    order_by_col,
+    letters = F
+) {
+  df <- data
+  df$ordering_metric <- df[order_by_col]
+  
+  df %>% 
+    mutate(
+      settings = if (letters) { settings_to_letters(settings) } else { settings }
+    ) %>% 
+    arrange(settings) %>% 
+    group_by(settings) %>% 
+    # Get ranks based on a certain metric
+    arrange(ordering_metric, model) %>% 
+    mutate(rank = row_number()) %>% 
+    select(settings, model, rank) %>%
+    arrange(settings)
+}
+
+# Note spearman == pearson here, as we're already generating ranks
+# TODO: Check whether we it's OK to precompute ranks for kendall's tau
+compute_rank_correlations_single_seed <- function(
+    data,
+    order_by_col,
+    cor_method = "spearman",
+    # Use letters instead of full settings as names
+    letters = F,
+    # Return full cormat or only half? (since they are symmetric)
+    full = T
+  ) {
+  stopifnot(is.character(order_by_col))
+  
+  cormat <- data %>%
+    compute_ranks(order_by_col = order_by_col, letters = letters) %>% 
+    # Generate a column for each configuration, with the ranks as its values
+    pivot_wider(names_from = settings, values_from = rank, id_cols = model) %>%
+    # Order by model
+    arrange(model) %>% 
+    select(-model) %>% 
+    cor(method = cor_method) %>% 
+    as.data.frame()
+  
+  if (!full) {
+    cormat[!lower.tri(cormat, diag = F)] <- NA
+  }
+  
+  cormat
+}
+
+compute_rank_correlations <- function (
+    data,
+    ...,
+    aggregate_via_mean = TRUE,
+    # Print out a summary?
+    summary = F,
+    # Should the mean be calculated before or after correlations?
+    # This should be FALSE, to correspond to the paper.
+    aggregate_before_cor = F
+  ) {
+  # There is an odd bug with group_map and "..." that leads to the grouping
+  # variable being passed as "..."? Seems to not really be documented.
+  # We therefore can't use a lambda and need to create this function
+  call_cor_func <- function (df_group) {
+    compute_rank_correlations_single_seed(df_group, ...) %>% 
+      rownames_to_column("scenario")
+  }
+  
+  if (!aggregate_before_cor) {
+    # Calculate correlations for every seed
+    output <- data %>% 
+      group_by(seed) %>% 
+      group_map(~ call_cor_func(.x)) %>% 
+      bind_rows() 
+    if (aggregate_via_mean) {
+      # Use mean correlations to keep old output format of a single matrix
+      output <- output %>% 
+        group_by(scenario) %>%
+        summarise(across(everything(), mean)) %>% 
+        column_to_rownames("scenario")
+    }
+  } else {
+    # Aggregate over seeds and then compute correlations
+    stopifnot(aggregate_via_mean)
+    warning("Aggregating before Correlations, this is just for robustness")
+    
+    output <- data %>% 
+      group_by(settings, model) %>% 
+      summarise(across(where(is.numeric), mean)) %>% 
+      call_cor_func() %>% 
+      column_to_rownames("scenario")
+  }
+  
+  if (summary) {
+    stopifnot(aggregate_via_mean)
+    
+    cor_values <- output[lower.tri(output, diag = F)] 
+    cat(
+      "Correlation Summary:\n",
+      "  Mean: ", mean(cor_values), "\n",
+      "  Median: ", median(cor_values), "\n",
+      "  Min: ", min(cor_values), "\n",
+      "  Max: ", max(cor_values), "\n",
+      "  SD: ", sd(cor_values), "\n",
+      "  N: ", length(cor_values), "\n",
+      sep = ""
+    )
+  }
+  
+  return (output)
+}
+```
+
+```{r fun-correlation_plot}
+correlation_plot <- function(data, order_by_col, cor_method = "spearman", invert = F) {
+  cormat <- compute_rank_correlations(
+    data, order_by_col, cor_method, letters = T, full = F, summary = F
+  )
+  
+  cormat_ordered <-  cormat %>% 
+    rownames_to_column("setting_1") %>% 
+    pivot_longer(-setting_1, names_to = "setting_2", values_to = "cor") %>% 
+    # na.omit() %>% 
+    rowwise() %>% 
+    mutate(
+      combined = paste(sort(unlist(strsplit(paste0(setting_1, setting_2), ""))), collapse = "")
+    ) %>% 
+    select(-starts_with("setting_")) %>% 
+    separate(combined, into = c("filler", "setting_1", "setting_2"), sep = "") %>% 
+    select(-filler) %>% 
+    mutate(
+      # Reverse order of setting 2 (the one with "a")
+      setting_2 = setting_2 %>% 
+        fct_rev()
+    )
+  if (invert) {
+    cormat_ordered <- cormat_ordered %>%
+      mutate(
+        tmp_sett_1 = setting_1,
+        setting_1 = setting_2 %>% fct_rev(),
+        setting_2 = tmp_sett_1 %>% fct_rev()
+      )
+  }
+  cor_symbol <- case_match(
+    cor_method,
+    # Sadly, there's a bug when rendering to PDF and
+    # using greek characters...
+    "spearman" ~ "rho", # "\u03C1", # rho
+    "kendall" ~ "tau", # "\u03C4", # tau
+  )
+  p <- cormat_ordered %>%
+    ggplot(aes(
+      x = setting_1,
+      y = setting_2,
+      label = cor %>%
+        round(digits = 2),
+      fill = cor
+    )) +
+    geom_tile() +
+    geom_text() +
+    theme_classic() +
+    scale_fill_distiller(
+      type = "div",
+      limits = c(-1, 1),
+      palette = "RdBu",
+      na.value = "black"
+    ) +
+    labs(
+      x = "Scenario",
+      y = "Scenario",
+      fill = paste0("Correlation (", cor_symbol, ")")
+    ) + 
+    # Transparent background
+    theme(
+      panel.background = element_rect(fill = "transparent", colour = NA),
+      plot.background = element_rect(fill = "transparent",colour = NA),
+      plot.title = element_text(hjust = 0.5, size = 13),
+      plot.caption = element_text(hjust = 0.5, size = 13)
+    )
+  if (invert) {
+    p <- p +
+      scale_x_discrete(position = "top") +
+      scale_y_discrete(position = "right")
+  }
+  p
+}
+```
+
+```{r fun-double_correlation_plot}
+double_correlation_plot <- function (
+    data,
+    col_bot_left,
+    col_top_right,
+    col_bot_left_title = str_to_title(str_replace_all(col_bot_left, "_", " ")),
+    col_top_right_title = str_to_title(str_replace_all(col_top_right, "_", " "))
+  ) {
+  size <- 4
+  spacing <- 1
+  
+  corplot_bl <- correlation_plot(data, col_bot_left) +
+    labs(caption = col_bot_left_title)
+  corplot_tr <- correlation_plot(data, col_top_right, invert = T) +
+    labs(title = col_top_right_title)
+  
+  (
+    corplot_bl + corplot_tr
+  ) + plot_layout(
+    design = c(
+      area(1 + spacing, 1, size, size - spacing),
+      area(1, 1 + spacing, size-spacing, size)
+    ),
+    guides = "collect"
+  ) +
+    plot_annotation(tag_levels = c('A')) &
+    # Remove rho as it gets misrendered in PDFs
+    labs(fill = "Correlation")
+}
+```
+
+
+
+```{r corplot-f1}
+#| fig-width: 5.5
+#| fig-height: 3.5
+correlation_plot(bank_results, "f1")
+```
+
+
+```{r corplot-eq-odds-diff}
+#| fig-width: 5.5
+#| fig-height: 3.5
+correlation_plot(bank_results, "equalized_odds_difference", invert = T)
+```
+
+
+```{r corplot-balacc-demparity}
+#| fig-width: 7
+#| fig-height: 5.5
+
+double_correlation_plot(
+  bank_results,
+  "balanced accuracy",
+  "demographic_parity_difference"
+)
+```
+
+```{r}
+scatter_plot <- function(data, order_by_col, settings_to_compare, filter_seed = 80539) {
+  stopifnot(length(settings_to_compare) == 2)
+  
+  print(paste("Only showing single seed:", filter_seed))
+  
+  colname_nice <- order_by_col %>% 
+    str_replace_all("_", " ") %>% 
+    str_to_title()
+  
+  data %>% 
+    filter(seed == filter_seed) %>%
+    compute_ranks(order_by_col, letters = T) %>% 
+    pivot_wider(id_cols = model, names_from = "settings", values_from = "rank") %>% 
+    ggplot(aes_string(
+      x = settings_to_compare[[1]],
+      y = settings_to_compare[[2]]
+    )) +
+    geom_point() +
+    geom_smooth(method = "lm", color = "darkgrey", linetype = "dotted") +
+    labs(
+      x = paste0(colname_nice, " (Scenario ", settings_to_compare[[1]], ")"),
+      y = paste0(colname_nice, " (Scenario ", settings_to_compare[[2]], ")")
+    )
+}
+```
+
+```{r scatter-detailed-eq-odds-diff}
+#| fig-width: 4
+#| fig-height: 3
+scatter_plot(bank_results, "equalized_odds_difference", c("c", "d"))
+```
+
+```{r scatter-detailed-f1}
+#| fig-width: 4
+#| fig-height: 3
+scatter_plot(bank_results, "f1", c("c", "d"))
+```
+
+#### Performance: Accuracy
+
+```{r}
+compute_rank_correlations(bank_results, "accuracy", letters = T, summary =T) %>% show()
+```
+
+#### Performance: Balanced Accuracy
+
+```{r}
+compute_rank_correlations(bank_results, "balanced accuracy", letters = T, summary =T) %>% show()
+```
+
+
+#### Performance: F1
+
+```{r}
+compute_rank_correlations(bank_results, "f1", letters = T, summary =T) %>% show()
+```
+
+#### Fairness: Equalized Odds Difference
+
+```{r}
+compute_rank_correlations(bank_results, "equalized_odds_difference", letters = T, summary =T) %>% show()
+```
+
+#### Fairness: Demographic Parity Difference
+
+```{r}
+compute_rank_correlations(bank_results, "demographic_parity_difference", letters = T, summary =T) %>% show()
+```
+
+## Spread of Metric within Settings
+
+```{r}
+bank_results %>% 
+  group_by(settings) %>% 
+  summarise(
+    mean_eod = mean(equalized_odds_difference),
+    sd_eod = sd(equalized_odds_difference),
+    min_eod = min(equalized_odds_difference),
+    max_eod = max(equalized_odds_difference),
+    spread_eod = max_eod - min_eod
+  )
+```
+
+```{r}
+bank_spread_stats <- bank_results %>% 
+  mutate(settings = settings_to_letters(settings)) %>% 
+  group_by(settings, seed) %>% 
+  summarise(
+    across(
+      all_of(
+        c("equalized_odds_difference", "demographic_parity_difference", "f1", "balanced accuracy")
+      ),
+      .fns = list(
+        mean=mean,
+        sd=sd,
+        min=min,
+        max=max,
+        spread= ~ max(.) - min(.)
+      ),
+      .names = "{fn}_{col}"
+    )
+  )
+bank_spread_stats
+```
+
+```{r}
+# Aggergate over all seeds
+bank_spread_stats %>% 
+  group_by(settings) %>% 
+  select(-seed) %>%
+  # Add mean to all colnames to be clear on what we actually do here
+  summarise(across(where(is.numeric), list(mean=mean), .names = "{fn}_{col}")) %>% 
+  t()
+```
+
+
+```{r}
+# Aggergate over all scenarios and seeds
+bank_spread_stats %>% 
+  ungroup() %>% 
+  select(-seed) %>%
+  # Add mean to all colnames to be clear on what we actually do here
+  summarise(across(where(is.numeric), list(mean=mean), .names = "{fn}_{col}")) %>% 
+  t()
+```
+
+# Analysis 3: Reproducing Lack of Standardization Results with the Methodology of Friedler et. al. (2019)
+
+```{r load_friedler}
+files <- fs::dir_ls(file.path(data_dir, "raw", "friedler-reproduction"), recurse = T, glob = "*_numerical.csv")
+length(files) %>% print()
+```
+
+```{r}
+friedler_results_raw <- lapply(files, function(file_path) {
+    file_name <- basename(file_path)
+    vroom::vroom(file_path, show_col_types=FALSE) %>%
+      mutate(filename = file_name) %>% 
+      relocate(filename)
+  }) %>%
+  bind_rows()
+```
+
+```{r}
+friedler_results <- friedler_results_raw %>% 
+  mutate(
+    settings = str_remove(filename, "-full_data_.*_numerical.csv"),
+    settings_letter = settings_to_letters(settings)
+  ) %>%
+  select(-filename) %>% 
+  relocate(starts_with("settings_")) %>% 
+  # Match column names to bank-results
+  rename(
+    scenario = settings_letter,
+    seed = "run-id"
+  ) %>% 
+  mutate(
+    model = algorithm
+  )
+```
+
+```{r}
+friedler_algo_counts <- friedler_results %>% 
+  count(model) %>% 
+  arrange(n) %>% 
+  mutate(keep = n == max(n))
+
+dropped_algos <- friedler_algo_counts %>% filter(!keep)
+kept_algos <- friedler_algo_counts %>% filter(keep)
+
+friedler_all <- friedler_results %>%
+  # Get rid of any models that did not run across all scenarios
+  # (as they will prevent correlations from being computed!)
+  anti_join(dropped_algos)
+```
+
+Algorithms, that were kept: `r kept_algos$model %>% paste(collapse = ", ")` (N = `r nrow(kept_algos)`) 
+
+Algorithms, that were removed: `r dropped_algos$model %>% paste(collapse = ", ")` (N = `r nrow(dropped_algos)`) 
+
+
+```{r}
+friedler_all %>% 
+  compute_rank_correlations("accuracy", letters = T, summary = T)
+```
+
+```{r}
+friedler_all %>% 
+  compute_rank_correlations("DIbinary", letters = T, summary = T)
+```
+```{r}
+correlation_plot(friedler_all, "accuracy")
+```
+
+```{r}
+correlation_plot(friedler_all, "DIbinary", invert = T)
+```
+
+Re DIbinary:
+
+> This metric calculates disparate imapct in the sense of the 80% rule before the 80%
+> threshold is applied.  This is described as DI in: https://arxiv.org/abs/1412.3756
+> If there are no positive protected classifications, 0.0 is returned.
+
+> Multiple protected classes are treated as one large group, so that this compares the privileged class to all non-privileged classes as a group.
+
+```{r corplot-friedler}
+#| fig-width: 7
+#| fig-height: 5.5
+double_correlation_plot(
+  friedler_all,
+  "accuracy", "DIbinary",
+  col_top_right_title = "Disparate Impact (binary)"
+)
+```
+
+

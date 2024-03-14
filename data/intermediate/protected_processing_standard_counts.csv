@@ -1,0 +1,28 @@
+protected_processing_standard,n,processing_category,cat_label_n,label_n
+agg-black-other,5,Aggregate,"Aggregate
+n = 20","agg-black-other
+n = 5"
+agg-black-white-hispanic-other,1,Aggregate,"Aggregate
+n = 20","agg-black-white-hispanic-other
+n = 1"
+agg-black-white-other,1,Aggregate,"Aggregate
+n = 20","agg-black-white-other
+n = 1"
+agg-white-other,13,Aggregate,"Aggregate
+n = 20","agg-white-other
+n = 13"
+filter-black-white,35,Filter / Discard,"Filter / Discard
+n = 38","filter-black-white
+n = 35"
+filter-black-white-hispanic,2,Filter / Discard,"Filter / Discard
+n = 38","filter-black-white-hispanic
+n = 2"
+filter-black-white-hispanic-other,1,Filter / Discard,"Filter / Discard
+n = 38","filter-black-white-hispanic-other
+n = 1"
+not-mentioned,10,?,"?
+n = 10","not-mentioned
+n = 10"
+none,1,Full Data,"Full Data
+n = 1","none
+n = 1"

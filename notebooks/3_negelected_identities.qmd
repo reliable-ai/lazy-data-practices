@@ -1,0 +1,476 @@
+---
+title: "Section 3: Neglected Identities"
+format:
+  html:
+    toc: true
+    execute:
+      fig-format: svg
+  pdf:
+    toc: true
+    keep-tex: true
+---
+
+```{r setup}
+source("../R/setup.R")
+```
+
+# Load Data
+
+```{r load_raw}
+datasets_raw <- load_datasets()
+```
+
+# Helper Function(s)
+
+```{r}
+save_sensitive <- function (data, name = NULL) {
+  dir <- file.path(data_dir, "intermediate", "sensitive")
+  if (is.null(name)) { name <- enexpr(data) }
+  dir.create(dir, showWarnings = F)
+  write_csv(
+    data,
+    file.path(dir, paste0(name, ".csv"))
+  )
+}
+```
+
+## Standard Categories
+
+Generate the list of standard categories (incl. the mapping to nice labels).
+
+```{r}
+standard_labels <- tibble::tribble(
+  ~cat,  ~sensitive_standard_label,
+  "GSI", "Sex",
+  "GSI", "Sexual orientation",
+  "GSI", "Gender",
+  "REO", "Race",
+  "REO", "Color",
+  "REO", "Ethnic origin",
+  "REO", "National origin",
+  "REO", "Language",
+  "REO", "National minority",
+  "SES", "Social origin",
+  "SES", "Property",
+  "SES", "Receipient of public assistance",
+  "RBO", "Religion",
+  "RBO", "Political opinion",
+  "RBO", "Other opinion",
+  "FST", "Birth status",
+  "FST", "Familial status",
+  "FST", "Marital status",
+  "DHC", "Disability",
+  "DHC", "Genetic features",
+  "AGE", "Age"
+) %>%
+  mutate(across(everything(), ~ factor(., levels = unique(.)))) %>% 
+  rename(
+    sensitive_cat = cat
+  ) %>% 
+  mutate(
+    sensitive_standard = sensitive_standard_label %>% 
+      str_to_lower() %>% 
+      str_replace_all(" ", "_")
+  ) %>% 
+  relocate(sensitive_cat)
+save_sensitive(standard_labels)
+
+show(standard_labels)
+```
+
+### Higher-Level Categories
+
+These are aggregated categories to allow for basic nesting of labels.
+
+```{r}
+sensitive_categories <- tribble(
+  ~sensitive_cat, ~sensitive_cat_label,
+  "GSI", "Gender and Sexual Identity",
+  "REO", "Racial and Ethnic Origin",
+  "SES", "Socio-Economic Status",
+  "RBO", "Religion, Belief and Opinion",
+  "FST", "Familial Status",
+  "DHC", "Disability and Health Conditions",
+  "AGE", "Age",
+  "MSC", "Miscellaneous"
+) %>%
+  mutate(across(everything(), ~ factor(., levels = unique(.))))
+
+sensitive_categories %>% show()
+```
+
+## Availability
+
+Standardize labels regarding the availability of protected attributes.
+
+```{r}
+sensitive_availability <- datasets_raw %>%
+  filter(STATUS == "DONE") %>% 
+  select(
+    dataset_id,
+    affiliation,
+    sensitive_standard
+  ) %>%
+  distinct() %>%
+  separate_rows(sensitive_standard, sep = ";") %>%
+  mutate(
+    sensitive_standard = str_trim(sensitive_standard) %>% 
+      str_replace_all(" ", "_")
+  ) %>% 
+  # Drop empty lines
+  filter(
+    (sensitive_standard != "") & !is.na(sensitive_standard)
+  ) %>% 
+  # Do a basic mapping into the standard categories
+  mutate(
+    sensitive_standard = sensitive_standard %>%
+      case_match(
+        "none" ~ NA,
+        "nationality" ~ "national_origin",
+        "ethnicity" ~ "ethnic_origin",
+        "familial" ~ "familial_status",
+        "family_status" ~ "familial_status",
+        "martial_status" ~ "marital_status",
+        "income" ~ "property",
+        .default = sensitive_standard
+      )
+  ) %>% 
+  filter(!is.na(sensitive_standard))
+```
+
+Check for issues with categories.
+
+```{r}
+rows_with_issues <- sensitive_availability %>% 
+  anti_join(standard_labels) %>% 
+  distinct(sensitive_standard)
+
+stopifnot(nrow(rows_with_issues) == 0)
+
+rows_with_issues
+```
+
+## Usage
+
+Standardize labels regarding the usage of protected attributes.
+
+```{r}
+library(jsonlite)
+
+parse_json <- function(json_string) {
+  parsed_json <- try(fromJSON(json_string))
+  if (class(parsed_json) == "try-error") {
+    # Error when parsing
+    return(list("parsing-error"))
+  } else {
+    return(parsed_json)
+  }
+}
+
+papers <- load_papers()
+papers_parsed_raw <- papers %>% 
+  filter(info_protected %in% c("Yes", "Guessable")) %>% 
+  mutate(
+    sensitive_parsed = col_protected %>% 
+       map(~ parse_json(.))
+  ) %>% 
+  unnest(col_protected)
+
+papers_parsed <- papers_parsed_raw %>% 
+  # Turn the nested lists into separate rows
+  mutate(
+    sensitive_raw = sensitive_parsed %>% 
+       map(~ unname(unlist(.)))
+  ) %>% 
+  unnest(sensitive_raw) %>% 
+  # Get 
+  mutate(
+    sensitive_standard = sensitive_raw %>% 
+      case_match(
+        "nationality" ~ "national_origin",
+        "native-country" ~ "national_origin",
+        "employment" ~ "other",
+        "ethnicity" ~ "ethnic_origin",
+        "relationship_status" ~ "other",
+        "alcohol_consumption" ~ "other",
+        "geography" ~ "other",
+        "profession" ~ "other",
+        "income" ~ "property",
+        .default = sensitive_raw
+      )
+  ) %>% 
+  # Drop all "other" categories
+  filter(sensitive_standard != "other")
+
+sensitive_usage <- papers_parsed %>% 
+  select(
+    new_dataset_id,
+    paper,
+    sensitive_standard
+  )
+```
+
+Check for any issues with categories in the usage data.
+
+```{r}
+papers_parsed %>% 
+  select(new_dataset_id, paper, sensitive_standard, sensitive_parsed, col_protected) %>% 
+  filter(sensitive_standard == "parsing-error") %>% 
+  select(-starts_with("sensitive_"))
+```
+
+```{r}
+papers_with_issues <- papers_parsed %>% 
+  anti_join(standard_labels) %>% 
+  distinct(sensitive_standard, .keep_all = T) %>% 
+  select(starts_with("sensitive"), new_dataset_id, name, paper)
+
+stopifnot(nrow(papers_with_issues) == 0)
+
+papers_with_issues
+```
+
+# Plots
+
+## Availability
+
+```{r fig-bar-sensitive-standard}
+standard_labels %>%
+  left_join(
+    sensitive_availability %>%
+      count(sensitive_standard)
+  ) %>%
+  left_join(
+    sensitive_categories
+  ) %>% 
+  filter(!is.na(sensitive_standard)) %>%
+  replace_na(list(n = 0)) %>%
+  ggplot(aes(
+    x = n,
+    y = sensitive_standard_label %>% fct_rev(),
+    fill = sensitive_cat_label
+  )) +
+  geom_col() +
+  labs(
+    x = "Number of Datasets with sens. Feature",
+    y = "Sensitive Feature (Standard)"
+  ) +
+  theme(legend.position = "none")
+```
+
+### Categories
+
+```{r fig-bar-sensitive-categories}
+sensitive_availability %>%
+  left_join(standard_labels) %>% 
+  left_join(sensitive_categories) %>% 
+  count(sensitive_cat_label) %>%
+  filter(!is.na(sensitive_cat_label)) %>%
+  replace_na(list(n = 0)) %>%
+  ggplot(aes(
+    x = n,
+    y = sensitive_cat_label %>% fct_rev(),
+    fill = sensitive_cat_label
+  )) +
+  geom_col() +
+  labs(
+    x = "Number of Datasets with sens. Feature",
+    y = "Sensitive Feature (Categories)"
+  ) +
+  theme(legend.position = "none")
+```
+
+## Final Combined Plot
+
+Prepare data for combined plot
+
+```{r}
+sensitive_counts <- standard_labels %>% 
+  left_join(sensitive_categories) %>% 
+  left_join(
+    sensitive_availability %>% 
+      count(sensitive_standard, name = "n_availability")
+  ) %>% 
+  left_join(
+    sensitive_usage %>% 
+      count(sensitive_standard, name = "n_usage")
+  ) %>% 
+  mutate(across(starts_with("n_"), ~ replace_na(., 0)))
+sensitive_counts
+```
+
+```{r fig-bar-sensitive-attrs}
+#| fig-width: 11
+#| fig-height: 9
+
+# Prepare color scales for plot
+color_scale_sensitive_cat <- sensitive_categories %>% 
+  nrow() %>% 
+  RColorBrewer::brewer.pal("Set1")
+names(color_scale_sensitive_cat) <- sensitive_categories$sensitive_cat_label
+# Switch Religion w/ Health
+temporary_color <- color_scale_sensitive_cat["Religion, Belief and Opinion"]
+color_scale_sensitive_cat["Religion, Belief and Opinion"] <- color_scale_sensitive_cat["Disability and Health Conditions"]
+color_scale_sensitive_cat["Disability and Health Conditions"] <- temporary_color
+
+color_scale_sensitive_cat_w <- c("white" = "#FFFFFF", color_scale_sensitive_cat)
+
+sensitive_counts %>% 
+  pivot_longer(starts_with("n_")) %>% 
+  mutate(
+    # Reverse for one side
+    flip = name == "n_availability",
+    # the brackets turn binary flip into: -1 or 1
+    flip_value = value * (1 - 2 * flip),
+    
+    # Rename for plot
+    name = name %>% str_remove("n_") %>% str_to_title()
+  ) %>% 
+  group_by(name) %>% 
+  mutate(
+    text_inside = value > (max(value) * .75)
+  ) %>% 
+  ungroup() %>% 
+  ggplot(aes(
+    x = flip_value,
+    y = sensitive_standard_label %>%
+      fct_rev(),
+    fill = sensitive_cat_label
+  )) +
+  geom_col() +
+  geom_text(aes(
+    hjust = if_else(text_inside,
+      # Inside the bars (only for large values)
+      if_else(flip, -0.1, 1.1),
+      # Outside (default)
+      if_else(flip, 1.2, -0.2)
+    ),
+    label = if_else(value > 0, as.character(value) %>% paste0("n=", .), ""),
+    color = if_else(text_inside, "white", sensitive_cat_label)
+  )) +
+  ggpol::facet_share(~name, scales = "free_x", reverse_num = T) +
+  theme_classic() +
+  labs(
+    y = NULL,
+    x = "Sensitive Attribute"
+  ) +
+  guides(color = "none", fill = guide_legend("Category")) +
+  theme(
+    legend.position = "bottom",
+    # strip.background = element_blank(),
+    strip.text = element_text(size = 13)
+  ) +
+  scale_fill_manual(values = color_scale_sensitive_cat) +
+  scale_color_manual(values = color_scale_sensitive_cat_w) +
+  scale_x_continuous(expand = expansion(c(0.01))) +
+  # There's extra margin on the left side of the plot due to hidden axis labels.
+  # We can manually remove this, but will have to update it in case labels
+  # change.
+  theme(plot.margin = unit(c(.5, .5, .5, -4), "cm"))
+```
+
+# Robustness
+
+## Comparison with 2023 Data
+
+```{r}
+new_articles_sensitive <- load_papers_2023() %>% 
+  filter(what_to_use == "dataset + attributes")
+new_sensitive <- new_articles_sensitive %>% 
+  separate_rows(sensitive_attribute_usage, sep = ";") %>% 
+  mutate(
+    sensitive_attribute_usage = sensitive_attribute_usage %>% 
+      str_trim() %>% 
+      str_replace_all(" ", "_"),
+    sensitive_standard = sensitive_attribute_usage %>% 
+      case_match(
+        "BMI" ~ "other",
+        "synth" ~ "other",
+        "job" ~ "other",
+        .default = sensitive_attribute_usage
+      )
+  ) %>% 
+  filter(sensitive_standard != "other")
+new_sensitive
+```
+
+Check for issues in labels.
+
+```{r}
+new_rows_with_issues <- new_sensitive %>% 
+  anti_join(standard_labels) %>% 
+  distinct(sensitive_standard)
+
+stopifnot(nrow(new_rows_with_issues) == 0)
+
+new_rows_with_issues
+```
+
+Count usage of sensitive attributes in 2023 papers.
+
+```{r}
+new_sensitive_counts <- new_sensitive %>% 
+  count(sensitive_standard, name = "n_usage_new", sort = T)
+new_sensitive_counts
+```
+Generate the robustness plot.
+
+```{r fig-bar-sensitive-2023}
+#| fig-width: 6
+#| fig-height: 7
+sensitive_counts %>% 
+  left_join(new_sensitive_counts, by = "sensitive_standard") %>% 
+  mutate(
+    n_usage_new = replace_na(n_usage_new, 0)
+  ) %>% 
+  # Compute fractions
+  mutate(
+    frac_usage = n_usage / sum(n_usage),
+    frac_usage_new = n_usage_new / sum(n_usage_new)
+  ) %>% 
+  pivot_longer(
+    cols = starts_with("frac_"),
+    names_to = "type",
+    values_to = "frac"
+  ) %>%
+  mutate(
+    type = case_match(
+      type,
+      "frac_usage" ~ "up to 2021",
+      "frac_usage_new" ~ "2023"
+    )
+  ) %>% 
+  ggplot(aes(
+    x = frac,
+    y = sensitive_standard_label %>% fct_rev(),
+    fill = type
+  )) +
+  geom_col(position = "dodge", width = 0.7) +
+  scale_fill_brewer(palette = "Set1", breaks = c("up to 2021", "2023")) +
+  labs(
+    x = "Fraction of Total Protected Attribute Usage",
+    y = "",
+    fill = "Timeframe"
+  ) +
+  scale_x_continuous(labels = scales::percent) +
+  theme_minimal()
+```
+
+# Inappropriate Usage
+
+Generate a quick number regarding inappropriate usage in the German Credit dataset.
+
+```{r}
+sensitive_usage %>% 
+  mutate(
+    # Extract first 7 characters
+    dataset_id = str_sub(new_dataset_id, 1, 7)
+  ) %>% 
+  filter(dataset_id == "ORG-072") %>% 
+  filter(!is.na(sensitive_standard)) %>% 
+  mutate(
+    uses_sex = sensitive_standard %in% c("gender", "sex")
+  ) %>% 
+  count(uses_sex) %>% 
+  mutate(frac = n / sum(n))
+````

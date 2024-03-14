@@ -1,0 +1,22 @@
+sensitive_cat,sensitive_standard_label,sensitive_standard
+GSI,Sex,sex
+GSI,Sexual orientation,sexual_orientation
+GSI,Gender,gender
+REO,Race,race
+REO,Color,color
+REO,Ethnic origin,ethnic_origin
+REO,National origin,national_origin
+REO,Language,language
+REO,National minority,national_minority
+SES,Social origin,social_origin
+SES,Property,property
+SES,Receipient of public assistance,receipient_of_public_assistance
+RBO,Religion,religion
+RBO,Political opinion,political_opinion
+RBO,Other opinion,other_opinion
+FST,Birth status,birth_status
+FST,Familial status,familial_status
+FST,Marital status,marital_status
+DHC,Disability,disability
+DHC,Genetic features,genetic_features
+AGE,Age,age

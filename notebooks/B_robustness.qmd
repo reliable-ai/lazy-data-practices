@@ -1,0 +1,114 @@
+---
+title: "Appendix B: Robustness"
+subtitle: "Are newer articles different in their dataset usage?"
+format:
+  html:
+    toc: true
+    execute:
+      fig-format: svg
+  pdf:
+    toc: true
+    keep-tex: true
+---
+
+```{r setup}
+source("../R/setup.R")
+```
+
+# Load Data
+
+```{r load_old}
+old_articles <- load_papers()
+dataset_info <- load_datasets()
+```
+
+```{r load_new}
+new_articles_raw <- load_papers_2023()
+new_articles_raw
+```
+
+```{r preprocess}
+new_articles <- new_articles_raw %>% 
+  mutate(
+    dataset_name = if_else(
+      is.na(our),
+      paste(datasets, "(new)"),
+      our
+    )
+  ) %>% 
+  # Join in dataset IDs
+  left_join(
+    dataset_info %>% 
+      # Keep only one row per name
+      distinct(dataset_name, .keep_all = TRUE) %>% 
+      select(dataset_name, dataset_id) %>%
+      filter(!is.na(dataset_name)),
+    by = c("our" = "dataset_name")
+  )
+```
+
+# Analysis
+
+## Descriptives
+
+```{r}
+counts_new <- new_articles %>% 
+  count(dataset_name, dataset_id, sort = TRUE) %>% 
+  mutate(
+    frac = n / sum(n),
+    rank = min_rank(-n)
+  )
+counts_new
+```
+
+```{r}
+counts_old <- old_articles %>% 
+  count(org_id, sort = TRUE) %>% 
+  rename(dataset_id = org_id) %>% 
+  left_join(
+    dataset_info %>% 
+      distinct(dataset_id, .keep_all = TRUE) %>% 
+      select(dataset_id, dataset_name),
+    by = "dataset_id"
+  ) %>% 
+  mutate(
+    frac = n / sum(n),
+    rank = min_rank(-n)
+  )
+counts_old
+```
+
+```{r}
+counts_combined <- counts_new %>% 
+  left_join(
+    counts_old %>% 
+      select(-dataset_name),
+    by = "dataset_id",
+    suffix = c("_new", "_old")
+  ) %>%
+  mutate(across(starts_with("frac_"), ~ scales::label_percent(accuracy = 0.1)(.)))
+counts_combined
+```
+
+```{r}
+#| label: tab-dataset-usage-new
+#| tbl-cap: "**The usage of datasets remained highly similar in 2023.** Usage of datasets in fairness-related articles published at FAccT and ICML 2023 compared to usage within the annotated literature. Only datasets which are used at least twice in 2023 are shown. Datasets are ordered by their usage in 2023."
+counts_combined %>% 
+  filter(n_new > 1) %>% 
+  arrange(rank_new, rank_old) %>% 
+  select(dataset_name, rank_new, frac_new, n_new, rank_old, frac_old, n_old) %>% 
+  mutate(across(everything(), ~ . %>% as.character() %>% replace_na("-"))) %>% 
+  # rename_with(~ str_replace(., "_new", "\n(2023)")) %>% 
+  # rename_with(~ str_replace(., "_old", "\n(<=2021)")) %>%
+  # rename(
+  #   "Rank (2023)" = rank_new,
+  #   "Rank (our Data)" = rank_old
+  # ) %>% 
+  rename_with(~ str_remove(., "_new")) %>% 
+  rename_with(~ str_replace(., "_old", " ")) %>% 
+  rename_with(~ str_replace(., "_", " ")) %>% 
+  rename_with(str_to_title) %>% 
+  kableExtra::kbl(format = "latex") %>% 
+  kableExtra::kable_classic() %>% 
+  kableExtra::add_header_above(c(" " = 1, "2023" = 3, "Up to 2021" = 3))
+```

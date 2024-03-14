@@ -1,0 +1,10 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Don't track notebook output
+notebooks/*.html
+notebooks/*.pdf
+notebooks/*.tex
+notebooks/*_files/

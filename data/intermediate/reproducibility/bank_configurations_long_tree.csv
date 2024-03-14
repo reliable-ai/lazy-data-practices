@@ -1,0 +1,15 @@
+from,to,n
+Bank,ORG-017-DS-0,5
+Bank,ORG-017-DS-2,4
+ORG-017-DS-0,"ORG-017-DS-0-{""age"": ""age"", ""job"": ""employment""}",1
+ORG-017-DS-0,"ORG-017-DS-0-{""age"": ""age""}",4
+ORG-017-DS-2,"ORG-017-DS-2-{""age"": ""age""}",1
+ORG-017-DS-2,"ORG-017-DS-2-{""job"": ""profession""}",1
+ORG-017-DS-2,"ORG-017-DS-2-{""marital"": ""marital_status""}",2
+"ORG-017-DS-0-{""age"": ""age"", ""job"": ""employment""}","ORG-017-DS-0-{""age"": ""age"", ""job"": ""employment""}-age >= 35; job: privileged vs. unprivileged",1
+"ORG-017-DS-0-{""age"": ""age""}","ORG-017-DS-0-{""age"": ""age""}-age >= 25",1
+"ORG-017-DS-0-{""age"": ""age""}","ORG-017-DS-0-{""age"": ""age""}-age >= 25 and age < 60",3
+"ORG-017-DS-2-{""age"": ""age""}","ORG-017-DS-2-{""age"": ""age""}-?",1
+"ORG-017-DS-2-{""job"": ""profession""}","ORG-017-DS-2-{""job"": ""profession""}-none",1
+"ORG-017-DS-2-{""marital"": ""marital_status""}","ORG-017-DS-2-{""marital"": ""marital_status""}-marital == married",1
+"ORG-017-DS-2-{""marital"": ""marital_status""}","ORG-017-DS-2-{""marital"": ""marital_status""}-none",1

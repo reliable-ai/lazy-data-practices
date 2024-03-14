@@ -1,0 +1,29 @@
+cat,src,sensitive_standard,sensitive_eu,sensitive_un,sensitive_us
+GSI,Legislation,Sex,Sex,Sex,Sex
+GSI,Legislation,Sexual orientation,Sexual orientation,,
+GSI,Legislation,Gender identity,,,Gender identity
+GSI,Fairness Lit.,Gender expression,,,
+REO,Legislation,Race,Race,Race,Race
+REO,Legislation,Color,Color,Colour,Color
+REO,Legislation,Ethnic origin,Ethnic origin,National origin,National origin
+REO,Legislation,Language,Language,Language,
+REO,Legislation,Membership of a national minority,Membership of a national minority,,
+SES,Legislation,Social origin,Social origin,Social origin,
+SES,Legislation,Property,Property,Property,
+SES,Legislation,Receipient of public assistance,,,Recipient of public assistance
+SES,Fairness Lit.,Income,,,
+SES,Fairness Lit.,Education,,,
+SES,Fairness Lit.,Profession,,,
+SES,Fairness Lit.,Citizenship,,,
+RBO,Legislation,Religion,Religion or belief,Religion,Religion
+RBO,Legislation,Political opinion,Political (and any other opinion),Political opinion,
+RBO,Legislation,Other opinion,Political (and any other opinion),Other opinion,
+FST,Legislation,Birth status,Birth,Birth status,
+FST,Legislation,Familial status,,,Familial status
+FST,Legislation,Marital status,,,Marital status
+DHC,Legislation,Disability,Disability,,Disability
+DHC,Fairness Lit.,Health,,,
+AGE,Legislation,Age,Age,,Age
+MSC,Legislation,Exercised rights under CCPA,,,Exercised rights under CCPA
+MSC,Fairness Lit.,Individual Identity,,,
+MSC,Fairness Lit.,Other,,,

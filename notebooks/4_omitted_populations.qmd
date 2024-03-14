@@ -1,0 +1,353 @@
+---
+title: "Section 4: Omitted Populations"
+format:
+  html:
+    toc: true
+    execute:
+      fig-format: svg
+  pdf:
+    toc: true
+    keep-tex: true
+---
+
+```{r setup}
+source("../R/setup.R")
+```
+
+# Load Data
+
+```{r load_raw}
+papers_raw <- load_papers()
+```
+
+# Prepare & Clean Data
+
+Look only at `COMPAS` data.
+
+```{r}
+papers_compas_raw <- papers_raw %>% 
+  filter(org_id == "ORG-040")
+```
+
+Aggregate the field `protected_processing_standard`.
+
+```{r}
+recode_processing <- function (processing) {
+  processing %>% 
+    # Rename "process" to "agg(regate)"
+    str_replace_all("process", "agg")
+}
+```
+
+```{r}
+papers_compas <- papers_compas_raw %>% 
+  mutate(
+    protected_processing_standard = protected_processing_standard %>% 
+      case_match(
+        "filter-black-white*" ~ "filter-black-white",
+        "unclear" ~ "not-mentioned",
+        .default = protected_processing_standard
+      ) %>% 
+      recode_processing()
+  )
+```
+
+```{r}
+levels_before <- c()
+levels_after <- c("not-mentioned", "none")
+processing_strategies_levels <- c(
+  levels_before,
+  papers_compas$protected_processing_standard %>%
+    unique() %>% 
+    sort() %>% 
+    .[!. %in% c(levels_before, levels_after)],
+  levels_after
+)
+
+order_processing_strategies <- function(processing_column) {
+  processing_column %>% 
+    factor(
+      levels = processing_strategies_levels[
+        # Only use levels that are in the column
+        processing_strategies_levels %in% processing_column
+      ]
+    )
+}
+
+rm(levels_before, levels_after)
+```
+
+```{r}
+papers_compas <- papers_compas %>% 
+  mutate(
+    protected_processing_standard = order_processing_strategies(protected_processing_standard)
+  )
+```
+
+# Analysis
+
+## Usage in Papers
+
+Check the number of papers using COMPAS we annotated.
+
+```{r}
+papers_compas %>% nrow()
+```
+
+In raw numbers.
+
+```{r}
+papers_compas %>% 
+  count(protected_processing_standard, sort = T) %>% 
+  mutate(
+    frac = n / sum(n),
+    frac_other = 1 - frac
+  )
+```
+
+Number of usage strategies.
+
+```{r}
+papers_compas %>% 
+  count(protected_processing_standard) %>% 
+  filter(protected_processing_standard != "not-mentioned") %>% 
+  nrow()
+```
+
+And visualized:
+
+```{r fig-bar-processing-usage}
+papers_compas %>% 
+  count(protected_processing_standard) %>% 
+  ggplot(
+    aes(
+      x = n,
+      y = protected_processing_standard
+    )
+  ) +
+  geom_col()
+```
+
+```{r}
+processing_standard_levels <- papers_compas$protected_processing_standard %>%
+  levels()
+
+create_color_scale <- function (labels, filter_substr, colorscale, offset = 2) {
+  filtered_labels <- labels %>%
+    str_extract(filter_substr) %>%
+    na.omit()
+  
+  max_n <- length(filtered_labels) + offset
+  colors <- RColorBrewer::brewer.pal(n = max_n, name = colorscale)[(offset + 1):max_n]
+  names(colors) <- rev(filtered_labels)
+  
+  return(colors)
+}
+
+final_color_scale <- c(
+  create_color_scale(processing_standard_levels, "none", "Greens"),
+  create_color_scale(processing_standard_levels, "filter-.*", "Blues"),
+  create_color_scale(processing_standard_levels, "process-.*", "Reds"),
+  "not-mentioned" = "#BBBBBB"
+)
+final_color_scale
+```
+
+```{r}
+extract_processing_categories <- . %>% 
+  str_split_i("-", i = 1) %>% 
+  case_match(
+    "none" ~ "Full Data",
+    "filter" ~ "Filter / Discard",
+    "agg" ~ "Aggregate",
+    "aggregate" ~ "Aggregate",
+    "not" ~ "?"
+  )
+```
+
+Prepare data to create a nested donut chart via rawgraphs.io.
+
+```{r}
+protected_processing_standard_counts <- papers_compas %>% 
+  count(protected_processing_standard) %>% 
+  mutate(
+    processing_category = protected_processing_standard %>% 
+      extract_processing_categories()
+  ) %>% 
+  group_by(processing_category) %>% 
+  mutate(
+    cat_label_n = paste0(processing_category, "\n", "n = ", sum(n)),
+    label_n = paste0(protected_processing_standard, "\n", "n = ", n)
+  ) %>% 
+  ungroup() %>% 
+  write_csv(
+    file.path(data_dir, "intermediate", "protected_processing_standard_counts.csv")
+  )
+protected_processing_standard_counts
+```
+
+```{r fig-donut-processing-usage}
+papers_compas %>% 
+  count(protected_processing_standard) %>% 
+  ggplot(
+    aes(
+      x = 0.5,
+      y = n,
+      fill = protected_processing_standard
+    )
+  ) +
+  geom_col(width = 0.2) +
+  xlim(c(0, 0.6)) +
+  coord_polar(theta = "y") +
+  theme_void() +
+  scale_fill_manual(values= final_color_scale)
+```
+
+## Distribution of Sensitive Attributes / Base Rates
+
+Load actual COMPAS data.
+
+```{r}
+compas_url <- file.path(data_dir, "raw", "compas", "compas-scores-two-years.csv")
+
+compas <- read_csv(compas_url)
+compas
+```
+
+Create a list of all different observed processing strategies (with actual functions to implement each strategy).
+
+```{r}
+processing_functions <- list(
+  "none" = function (compas) {
+    compas
+  },
+  "filter-black-white" = function (compas) {
+    compas %>%
+      filter(race %in% c("African-American", "Caucasian"))
+  },
+  "filter-black-white-hispanic" = function (compas) {
+    compas %>%
+      filter(race %in% c("African-American", "Caucasian", "Hispanic"))
+  },
+  "filter-black-white-hispanic-other" = function (compas) {
+    compas %>%
+      filter(race %in% c("African-American", "Caucasian", "Hispanic", "Other"))
+  },
+  "agg-white-other" = function (compas) {
+    compas %>%
+      mutate(
+        race = case_match(
+          race,
+          "Caucasian" ~ "Caucasian",
+          .default = "Other"
+        )
+      )
+  },
+  "agg-black-white-other" = function (compas) {
+    compas %>%
+      mutate(
+        race = case_match(
+          race,
+          "African-American" ~ "African-American",
+          "Caucasian" ~ "Caucasian",
+          .default = "Other"
+        )
+      )
+  },
+  "agg-black-other" = function (compas) {
+    compas %>%
+      mutate(
+        race = case_match(
+          race,
+          "African-American" ~ "African-American",
+          .default = "Other"
+        )
+      )
+  },
+  "agg-black-white-hispanic-other" = function (compas) {
+    compas %>%
+      mutate(
+        race = case_match(
+          race,
+          "African-American" ~ "African-American",
+          "Caucasian" ~ "Caucasian",
+          "Hispanic" ~ "Hispanic",
+          .default = "Other"
+        )
+      )
+  }
+)
+```
+
+Check for a mismatch in strategies i.e. missing or extra strategies compared to annotations.
+
+```{r}
+labels_in_functions <- names(processing_functions)
+labels_in_annotations <- papers_compas$protected_processing_standard %>% levels()
+
+extra_labels <- labels_in_functions[!(labels_in_functions %in% labels_in_annotations)]
+missing_labels <- labels_in_annotations[!(labels_in_annotations %in% labels_in_functions)]
+
+stopifnot(length(extra_labels) == 0)
+stopifnot(length(missing_labels) == 1)
+
+extra_labels
+missing_labels
+```
+
+### Apply Processing Strategies
+
+```{r}
+processed_datasets <- lapply(processing_functions, function(processing_function) {
+  processing_function(compas)
+})
+
+processed_counts <- data.frame()
+for (name in names(processed_datasets)) {
+  new_counts <- processed_datasets[[name]] %>% 
+    count(race) %>% 
+    mutate(
+      processing = name,
+      frac = n / sum(n)
+    ) %>% 
+    relocate(processing)
+  
+  processed_counts <- rbind(
+    processed_counts,
+    new_counts
+  )
+}
+rm(new_counts)
+```
+
+### Examine Distribution in Processed Data
+
+```{r fig-bar-processing-variation}
+processed_counts %>% 
+  mutate(
+    processing = recode_processing(processing)
+  ) %>% 
+  mutate(
+    processing = order_processing_strategies(processing),
+    processing_group = processing %>% 
+      extract_processing_categories() %>% 
+      factor(
+        levels = c("Full Data", "Filter / Discard", "Aggregate")
+      )
+  ) %>% 
+  ggplot(aes(x = processing, y = n, fill = race)) +
+  geom_col() +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 30, vjust = 1, hjust=1)) +
+  scale_fill_brewer(type = "qual", palette = 3) +
+  facet_grid(~ processing_group, scales = "free_x", space = "free_x") +
+  labs(
+    x = "Processing of Protected Attribute",
+    y = "Count",
+    fill = "Populations (Race)"
+  ) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.spacing = unit(1.3, "lines")
+  )
+```

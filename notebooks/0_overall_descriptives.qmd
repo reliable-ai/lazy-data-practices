@@ -1,0 +1,80 @@
+---
+title: "1: Descriptives"
+subtitle: "Overall Descriptive Information regarding the Data"
+format:
+  html:
+    toc: true
+    execute:
+      fig-format: svg
+  pdf:
+    toc: true
+    keep-tex: true
+---
+
+```{r setup}
+source("../R/setup.R")
+```
+
+```{r}
+papers <- load_papers()
+datasets <- load_datasets()
+datasets_with_variants <- load_datasets(include_variants = TRUE)
+```
+
+## Counts
+
+### Overall
+
+```{r}
+papers %>% 
+  nrow()
+```
+
+```{r}
+papers %>% 
+  distinct(paper) %>%
+  nrow()
+```
+
+
+```{r}
+datasets %>% 
+  nrow()
+```
+
+```{r}
+datasets_with_variants %>% 
+  nrow()
+```
+
+### Status
+
+This was used to verify that only properly annotated data was included in the analyses.
+
+```{r}
+papers %>% 
+  count(STATUS)
+```
+
+```{r}
+datasets %>% 
+  count(STATUS)
+```
+
+```{r}
+datasets_with_variants %>% 
+  count(STATUS)
+```
+## Country / Continent
+
+Compute basic descriptives for different countries and continents.
+
+```{r}
+datasets %>%
+  count(continent, sort = T)
+```
+```{r}
+datasets %>%
+  count(country, sort = T)
+```
+

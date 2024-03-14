@@ -1,0 +1,58 @@
+sensitive_raw,sensitive_standard,datasets
+age,age,ORG-004;ORG-006;ORG-007;ORG-010;ORG-011;ORG-012;ORG-014;ORG-017;ORG-018;ORG-023;ORG-031;ORG-037;ORG-038;ORG-040;ORG-042;ORG-043;ORG-044;ORG-045;ORG-048;ORG-049;ORG-050;ORG-051;ORG-052;ORG-053;ORG-055;ORG-062;ORG-063;ORG-069;ORG-072;ORG-079;ORG-081;ORG-082;ORG-085;ORG-089;ORG-090;ORG-096;ORG-103;ORG-105;ORG-107;ORG-109;ORG-112;ORG-118;ORG-121;ORG-122;ORG-126;ORG-127;ORG-130;ORG-135;ORG-138;ORG-142;ORG-143;ORG-145;ORG-150;ORG-153;ORG-155;ORG-173;ORG-174;ORG-176;ORG-177;ORG-178;ORG-179;ORG-196;ORG-200;ORG-201;ORG-205;ORG-209;ORG-216
+age. (of patient),age,ORG-032
+citizenship,citizenship,ORG-055
+skin color,color,ORG-051;ORG-088
+skin tone,color,ORG-031;ORG-063;ORG-090
+skin tone. (inferred),color,ORG-133
+skin type,color,ORG-004;ORG-141;ORG-170
+disability,disability,ORG-036;ORG-042;ORG-090
+education,education,ORG-037
+birthplace,ethnic_origin,ORG-042;ORG-100
+ethnicity,ethnic_origin,ORG-011;ORG-037;ORG-047;ORG-052;ORG-053;ORG-084;ORG-085;ORG-089;ORG-096;ORG-111;ORG-112;ORG-118;ORG-127;ORG-130;ORG-153;ORG-173;ORG-198;ORG-204;ORG-209
+geography,ethnic_origin,ORG-001;ORG-005;ORG-010;ORG-011;ORG-028;ORG-033;ORG-037;ORG-038;ORG-039;ORG-042;ORG-044;ORG-048;ORG-049;ORG-052;ORG-056;ORG-060;ORG-067;ORG-072;ORG-076;ORG-080;ORG-084;ORG-094;ORG-095;ORG-097;ORG-102;ORG-103;ORG-104;ORG-116;ORG-123;ORG-130;ORG-140;ORG-143;ORG-145;ORG-152;ORG-160;ORG-162;ORG-164;ORG-168;ORG-174;ORG-176;ORG-179;ORG-180;ORG-212;ORG-216;ORG-222
+geography. (author),ethnic_origin,ORG-129
+geography. (user and artist),ethnic_origin,ORG-107
+family size,familial_status,ORG-042
+gender,gender_identity,ORG-004;ORG-010;ORG-011;ORG-015;ORG-018;ORG-020;ORG-021;ORG-022;ORG-023;ORG-024;ORG-027;ORG-029;ORG-031;ORG-036;ORG-037;ORG-038;ORG-043;ORG-044;ORG-048;ORG-049;ORG-050;ORG-051;ORG-052;ORG-059;ORG-060;ORG-062;ORG-063;ORG-071;ORG-083;ORG-085;ORG-086;ORG-087;ORG-088;ORG-090;ORG-092;ORG-095;ORG-097;ORG-100;ORG-104;ORG-105;ORG-107;ORG-110;ORG-112;ORG-118;ORG-121;ORG-122;ORG-123;ORG-124;ORG-125;ORG-129;ORG-133;ORG-137;ORG-138;ORG-141;ORG-143;ORG-149;ORG-150;ORG-155;ORG-173;ORG-174;ORG-179;ORG-182;ORG-183;ORG-196;ORG-198;ORG-199;ORG-202;ORG-203;ORG-204;ORG-205;ORG-216;ORG-217;ORG-218;ORG-219;ORG-222
+gender. (Annotations for Facebook and TED come from Wikipedia and \citet{mirkin2015:motivating} respectively. Reddit and Fitocracy rely on self-reported labels.),gender_identity,ORG-161
+gender. (author),gender_identity,ORG-159
+gender. (infant and parents),gender_identity,ORG-096
+gender. (of child),gender_identity,ORG-007
+gender. People's gender and other sensitive annotations may be present in synsets from the person subtree,gender_identity,ORG-091
+visual and textual references to gender,gender_identity,ORG-208
+weight,health,ORG-090
+financial status,income,ORG-198
+artist,individual_identity,ORG-115;ORG-116
+author,individual_identity,ORG-002;ORG-013;ORG-075;ORG-156
+dialect,language,ORG-183;ORG-197
+language,language,ORG-164
+spoken language,language,ORG-018
+activity,other,ORG-104
+blood type,other,ORG-102;ORG-103
+brand ownership,other,ORG-008
+business size,other,ORG-028
+demographics of people featured in entities and their relations,other,ORG-070;ORG-213
+football conference,other,ORG-064
+jersey color,other,ORG-015
+news provider,other,ORG-223
+ownership,other,ORG-224
+record label,other,ORG-115
+textual references to people and their demographics,other,ORG-025;ORG-046;ORG-073;ORG-078;ORG-106;ORG-108;ORG-128;ORG-136;ORG-154;ORG-156;ORG-165;ORG-167;ORG-175;ORG-188;ORG-190;ORG-191;ORG-192;ORG-193;ORG-207;ORG-211;ORG-214;ORG-215
+tour availability,other,ORG-224
+gay-friendliness,political_opinion,ORG-018
+political affiliation,political_opinion,ORG-113
+political leaning,political_opinion,ORG-024;ORG-049;ORG-194;ORG-195
+profession,profession,ORG-024
+family wealth,property,ORG-131
+race,race,ORG-000;ORG-006;ORG-007;ORG-015;ORG-020;ORG-024;ORG-026;ORG-036;ORG-038;ORG-039;ORG-040;ORG-048;ORG-050;ORG-058;ORG-059;ORG-063;ORG-066;ORG-069;ORG-084;ORG-085;ORG-090;ORG-092;ORG-096;ORG-097;ORG-105;ORG-109;ORG-111;ORG-113;ORG-123;ORG-126;ORG-127;ORG-130;ORG-137;ORG-144;ORG-149;ORG-150;ORG-153;ORG-155;ORG-157;ORG-173;ORG-174;ORG-176;ORG-177;ORG-181;ORG-196;ORG-201;ORG-219
+race. (defendants and crowd-sourced judges),race,ORG-045
+race. (inferred),race,ORG-205
+race. (inferrred),race,ORG-151
+religion,religion,ORG-024;ORG-036;ORG-090;ORG-092
+sex,sex,ORG-006;ORG-012;ORG-014;ORG-032;ORG-040;ORG-042;ORG-045;ORG-053;ORG-055;ORG-069;ORG-079;ORG-081;ORG-082;ORG-084;ORG-089;ORG-109;ORG-117;ORG-126;ORG-127;ORG-135;ORG-144;ORG-145;ORG-153;ORG-163;ORG-176;ORG-177;ORG-178;ORG-200;ORG-209
+sexual orientation,sexual_orientation,ORG-036;ORG-085;ORG-090
+birth category,social_origin,ORG-087
+caste,social_origin,ORG-095
+none,NA,ORG-003;ORG-009;ORG-016;ORG-019;ORG-030;ORG-034;ORG-035;ORG-041;ORG-054;ORG-057;ORG-061;ORG-065;ORG-068;ORG-074;ORG-077;ORG-093;ORG-098;ORG-099;ORG-101;ORG-114;ORG-120;ORG-132;ORG-134;ORG-139;ORG-146;ORG-147;ORG-148;ORG-158;ORG-166;ORG-169;ORG-171;ORG-172;ORG-189;ORG-206;ORG-210;ORG-220;ORG-221
+synthetic,NA,ORG-119;ORG-184;ORG-185;ORG-186;ORG-187
