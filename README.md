@@ -1,6 +1,6 @@
 # Lazy Data Practices Harm Fairness Research
 
-This repository contains the code and data for the paper "Lazy Data Practices Harm Fairness Research" by {ANONYMOUS AUTHORS}.
+This repository contains the code and data for the paper "Lazy Data Practices Harm Fairness Research" by Jan Simson, Alessandro Fabris and Christoph Kern to be presented at the *ACM Conference on Fairness, Accountability, and Transparency 2024* in Rio de Janeiro, Brazil in June 2024.
 
 ## Structure
 
@@ -42,4 +42,12 @@ With the exception of the reproduction of Friedler et al. (2019), all analyses c
 
 ## Citing this Project
 
-{OMMITTED FOR ANONYMITY}
+Simson, J., Fabris, A., & Kern, C. (2022). Lazy Data Practices Harm Fairness Research *(forthcoming)*. Accepted for Publication at the *2024 ACM Conference on Fairness, Accountability, and Transparency (FAccT 2024)*.
+
+## License
+
+All work produced by the authors in this repository is licensed under the [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/). Please note that the authors do not hold the rights to the original datasets (Bank, COMPAS) used in this project, for which other licenses may apply. The analysis code for the reproduction of Friedler et al. (2019) is based on the [original code](https://github.com/algofairness/fairness-comparison) provided by the authors and licensed under the Apache License.
+
+## Acknowledgements
+
+This project was funded by the Federal Ministry of Education and Research. The responsibility for the content of this publication lies with the authors.
