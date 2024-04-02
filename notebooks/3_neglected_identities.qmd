@@ -473,4 +473,4 @@ sensitive_usage %>%
   ) %>% 
   count(uses_sex) %>% 
   mutate(frac = n / sum(n))
-````
+```
