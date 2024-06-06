@@ -1,6 +1,6 @@
 # Lazy Data Practices Harm Fairness Research
 
-This repository contains the code and data for the paper "Lazy Data Practices Harm Fairness Research" by Jan Simson, Alessandro Fabris and Christoph Kern to be presented at the *ACM Conference on Fairness, Accountability, and Transparency 2024* in Rio de Janeiro, Brazil in June 2024.
+This repository contains the code and data for the paper [Lazy Data Practices Harm Fairness Research](https://doi.org/10.1145/3630106.3658931) by Jan Simson, Alessandro Fabris and Christoph Kern, published in the proceedings of the *ACM Conference on Fairness, Accountability, and Transparency 2024* in Rio de Janeiro, Brazil in June 2024.
 
 ## Structure
 
